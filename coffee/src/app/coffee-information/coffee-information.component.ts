@@ -10,11 +10,11 @@ export interface CoffeeSorts {
 }
 
 const ELEMENT_DATA: CoffeeSorts[] = [
-  {id: 1, thumbnail: '../../../resources/C-0004-2000x2000.png', name: 'Espresso Cosi', description: 'Fruity', price: 1},
-  {id: 2, thumbnail: '/home/user/Desktop/ERC20DApp/coffee/resources/C-0023-2000x2000.png', name: 'Ristretto', description: 'Powerful and Contrasting', price: 1},
-  {id: 3, thumbnail: '/home/user/Desktop/ERC20DApp/coffee/resources/C-0359-India-2000x2000.png', name: 'Master Origin India', description: 'Intense and Spicy', price: 1},
-  {id: 4, thumbnail: '/home/user/Desktop/ERC20DApp/coffee/resources/C-0360-Indonesia-2000x2000.png', name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1},
-  {id: 5, thumbnail: '/home/user/Desktop/ERC20DApp/coffee/resources/C-0372-Paris-Macaron-2000x2000.png', name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1}
+  {id: 1, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10386856312862/C-0004-2000x2000.png?impolicy=product&imwidth=65", name: 'Espresso Cosi', description: 'Fruity', price: 1},
+  {id: 2, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10386857492510/C-0023-2000x2000.png?impolicy=product&imwidth=65", name: 'Ristretto', description: 'Powerful and Contrasting', price: 1},
+  {id: 3, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10840367792158/C-0359-India-2000x2000.png?impolicy=product&imwidth=65", name: 'Master Origin India', description: 'Intense and Spicy', price: 1},
+  {id: 4, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10820727865374/C-0360-Indonesia-2000x2000.png?impolicy=product&imwidth=65", name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1},
+  {id: 5, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/11761093050398/C-0372-Paris-Macaron-2000x2000.png?impolicy=product&imwidth=65", name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1}
 ];
 
 @Component({

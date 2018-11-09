@@ -1,4 +1,3 @@
-<img src="./resources/C-0004-2000x2000.jpg"/>
 <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
 
@@ -10,7 +9,7 @@
   <ng-container matColumnDef="thumbnail">
     <th mat-header-cell *matHeaderCellDef> Bild </th>
     <td  mat-cell *matCellDef="let element"> 
-        <img src="../../resources/C-0004-2000x2000.png"/>
+        <img src={{element.thumbnail}}>
       </td>
   </ng-container>
 
