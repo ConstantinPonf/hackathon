@@ -35,7 +35,8 @@
 </table>
 
 <div class="example-button-row" style="height: 100%;">
-    <button *ngIf (onclick)=loadingScreen() mat-raised-button>Bestellen</button>
+    <button (click)=loadingScreen() mat-raised-button>Bestellen</button>
+    <mat-spinner *ngIf="coffeeInProcess"></mat-spinner>
 </div>
 
 

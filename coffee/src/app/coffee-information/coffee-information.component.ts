@@ -27,13 +27,20 @@ export class CoffeeInformationComponent implements OnInit {
   dataSource = ELEMENT_DATA;
 
   selectedRowIndex: number = -1;
+  coffeeInProcess: boolean = false;
 
 highlight(row){
     this.selectedRowIndex = row.id;
 }
 
 loadingScreen() {
-  window.alert("Hallo");
+  if(this.selectedRowIndex == null) {
+    window.alert("Es ist kein Kaffee ausgewählt!")
+  }
+  else {
+    console.log(this.selectedRowIndex);
+    this.coffeeInProcess = true;
+  }
 }
 
   ngOnInit () {}
