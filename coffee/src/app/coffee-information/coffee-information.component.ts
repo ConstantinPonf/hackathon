@@ -59,7 +59,7 @@ export class CoffeeInformationComponent implements OnInit {
         await this.delay(3000);
     }
     this.coffeeInProcess = false;
-    window.alert("Kaffee wird zubereitet...");
+    window.alert("Kaffee wird zubereitet...\n\nNutzer: -1,0\nHändler: +0,7\nPlantage: +0,3");
     }
   }
 
