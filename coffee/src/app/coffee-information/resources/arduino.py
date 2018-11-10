@@ -7,26 +7,34 @@ import urllib.request
 
 ser = serial.Serial('COM3', 9600,timeout = 1000)
 triggered = False
-recievedTrigger = False
 
-def request():
-    f = urllib.request.urlopen("http://localhost:8081/test")
+def request(jquery):
+    f = urllib.request.urlopen("http://localhost:8081/test?" + jquery)
     print(f.read().decode("utf-8"))
 
-request()
+def getQuery():
+    ret = "triggered="
+    if triggered:
+        ret = ret+ "1"
+    else:
+        ret = ret+"0"
+    return ret
+
+def setState(s):
+    if s == "1":
+        triggered = True
+    else:
+        triggered = False
+        ser.write(b'1')
+        
+
+request(getQuery())
 
 while True:
     input = ser.readline()
     
-    if ("TRIGGER" in input.decode("utf-8") )and triggered and not recievedTrigger:
+    if ("TRIGGER" in input.decode("utf-8") ) and not triggered:
         triggered = True
-        ## not true in final version
-        recievedTrigger = False
-        print(triggered)
-        print(recievedTrigger)
-        
-    
-    if triggered and recievedTrigger:
-        triggered = False
-        recievedTrigger = False
-        ser.write(b'1')
+        request(getQuery())
+    else:
+        setState(request(getQuery))
