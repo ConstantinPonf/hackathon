@@ -1,6 +1,9 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material';
+import { HttpService } from './http.service';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
@@ -15,9 +18,12 @@ import { CoffeeInformationComponent } from './coffee-information/coffee-informat
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
+    HttpModule,
+    HttpClientModule
   ],
   providers: [
+    HttpService
   ],
   bootstrap: [AppComponent]
 })
