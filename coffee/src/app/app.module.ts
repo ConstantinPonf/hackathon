@@ -17,7 +17,8 @@ import { CoffeeInformationComponent } from './coffee-information/coffee-informat
     BrowserAnimationsModule,
     MaterialModule
   ],
-  providers: [],
+  providers: [
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
