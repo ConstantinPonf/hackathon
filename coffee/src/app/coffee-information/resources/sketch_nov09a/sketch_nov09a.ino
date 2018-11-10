@@ -36,6 +36,7 @@ void loop() {
     digitalWrite(2, LOW);
     delay(3000);
     digitalWrite(2, HIGH);
+    delay(2000);
  
     // Versetzt die gelesene Karte in einen Ruhemodus, um nach anderen Karten suchen zu können.
     //mfrc522.PICC_HaltA();

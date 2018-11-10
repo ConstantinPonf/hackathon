@@ -1,6 +1,8 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Coffee } from '../coffee'
 import { HttpService } from '../http.service';
+import { timeout } from 'q';
+import { SelectMultipleControlValueAccessor } from '@angular/forms';
 
 export interface CoffeeSorts {
   id: number;
@@ -40,22 +42,31 @@ export class CoffeeInformationComponent implements OnInit {
     this.selectedRowIndex = row.id;
   }
 
-  loading() {
+
+  async loading() {
     
     if(this.selectedRowIndex === -1) {
       window.alert("Es ist kein Kaffee ausgewählt!");
     }
     else {
       this.coffeeInProcess = true;
+      console.log("Going to while");
       while(this.wait === "0") {
         this.httpService.sendData(this.trigger).subscribe(res => {
         console.log(res);
         this.wait = res; 
-      }
-    );
-  }
+        });
+        await this.delay(3000);
+        
+    }
+     window.alert("TRIGGERED");
     }
   }
 
   ngOnInit () {}
+
+  private delay(ms: number)
+  {
+    return new Promise(resolve => setTimeout(resolve, ms));
+  }
 }

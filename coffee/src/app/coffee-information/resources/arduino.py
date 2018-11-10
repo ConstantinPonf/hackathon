@@ -30,7 +30,6 @@ def setState(s):
         
 while True:
     input = ser.readline()
-    print(input)
     
     if ("TRIGGER" in input.decode("utf-8") ):
         triggered = True
