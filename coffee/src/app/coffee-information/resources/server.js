@@ -18,9 +18,16 @@ app.use(cors())
       console.log("Send 1")
       res.send("1");
     }
-    else{
+    else if(req.query["triggered"] == "0"){
       triggered = false;
       res.send("0")
+    }
+    if(req.query["triggered"] == "2"){
+      if(triggered){
+        res.send("1")
+      }else{
+        res.send("0");
+      }
     }
     
   });
