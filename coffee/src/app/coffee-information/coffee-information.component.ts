@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, NgModule } from '@angular/core';
 import { Coffee } from '../coffee'
 
 export interface CoffeeSorts {
@@ -30,19 +30,19 @@ export class CoffeeInformationComponent implements OnInit {
   coffeeInProcess: boolean = false;
   jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
 
-highlight(row){
-    this.selectedRowIndex = row.id;
-}
 
-loadingScreen() {
-  if(this.selectedRowIndex == null) {
-    window.alert("Es ist kein Kaffee ausgewählt!")
+  highlight(row){
+    this.selectedRowIndex = row.id;
   }
-  else {
-    console.log(this.selectedRowIndex);
-    this.coffeeInProcess = true;
+
+  loading() {
+    if(this.selectedRowIndex === -1) {
+      window.alert("Es ist kein Kaffee ausgewählt!");
+    }
+    else {
+      this.coffeeInProcess = true;
+    }
   }
-}
 
   ngOnInit () {}
 }
