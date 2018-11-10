@@ -34,7 +34,7 @@ export class CoffeeInformationComponent implements OnInit {
   jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
 
   trigger: string = "2";
-  wait: string = "0";
+  wait: string = "1";
 
   constructor(private httpService: HttpService) {}
 
@@ -57,9 +57,10 @@ export class CoffeeInformationComponent implements OnInit {
         this.wait = res; 
         });
         await this.delay(3000);
-        
     }
-     window.alert("TRIGGERED");
+    await this.delay(3000);
+    this.coffeeInProcess = false;
+    window.alert("TRIGGERED");
     }
   }
 
