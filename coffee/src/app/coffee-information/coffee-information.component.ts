@@ -48,8 +48,9 @@ export class CoffeeInformationComponent implements OnInit {
     else {
       this.coffeeInProcess = true;
       while(this.wait === "0") {
-      this.httpService.sendData(this.trigger).subscribe(res => {
-        console.log(res); 
+        this.httpService.sendData(this.trigger).subscribe(res => {
+        console.log(res);
+        this.wait = res; 
       }
     );
   }
