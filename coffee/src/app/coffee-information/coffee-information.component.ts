@@ -1,5 +1,6 @@
 import { Component, OnInit, NgModule } from '@angular/core';
 import { Coffee } from '../coffee'
+import { HttpService } from '../http.service';
 
 export interface CoffeeSorts {
   id: number;
@@ -30,17 +31,25 @@ export class CoffeeInformationComponent implements OnInit {
   coffeeInProcess: boolean = false;
   jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
 
+trigger: string = '0';
+
+  constructor(private httpService: HttpService) {}
 
   highlight(row){
     this.selectedRowIndex = row.id;
   }
 
   loading() {
+    
     if(this.selectedRowIndex === -1) {
       window.alert("Es ist kein Kaffee ausgewählt!");
     }
     else {
       this.coffeeInProcess = true;
+      this.httpService.sendData(this.trigger).subscribe(res => {
+        console.log(res); 
+      }
+    );
     }
   }
 
