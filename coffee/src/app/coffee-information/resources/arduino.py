@@ -8,16 +8,17 @@ import urllib.request
 ser = serial.Serial('COM3', 9600,timeout = 1000)
 triggered = False
 
-def request(jquery):
-    f = urllib.request.urlopen("http://localhost:8081/test?" + jquery)
-    print(f.read().decode("utf-8"))
+def request(JJquery):
+    f = urllib.request.urlopen("http://localhost:8081/test?" + JJquery)
+    s = f.read().decode("utf-8")
+    return s
 
 def getQuery():
     ret = "triggered="
     if triggered:
-        ret = ret+ "1"
+        ret = ret +  "1"
     else:
-        ret = ret+"0"
+        ret = ret + "0"
     return ret
 
 def setState(s):
@@ -25,16 +26,18 @@ def setState(s):
         triggered = True
     else:
         triggered = False
-        ser.write(b'1')
+    return triggered
         
-
-request(getQuery())
-
 while True:
     input = ser.readline()
+    print(input)
     
-    if ("TRIGGER" in input.decode("utf-8") ) and not triggered:
+    if ("TRIGGER" in input.decode("utf-8") ):
         triggered = True
-        request(getQuery())
+        s = getQuery()
+        s = request(s)
     else:
-        setState(request(getQuery))
+        s = getQuery()
+        s = request(s)
+        setState(s)
+    

@@ -15,14 +15,11 @@ app.use(cors())
     console.log(req.query)
     if(req.query["triggered"] == "1"){
       triggered= true;
-    }
-    else{
-      triggered = false;
-    }
-    if(triggered){
+      console.log("Send 1")
       res.send("1");
     }
     else{
+      triggered = false;
       res.send("0")
     }
     
