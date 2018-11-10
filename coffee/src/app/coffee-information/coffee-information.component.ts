@@ -28,6 +28,7 @@ export class CoffeeInformationComponent implements OnInit {
 
   selectedRowIndex: number = -1;
   coffeeInProcess: boolean = false;
+  jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
 
 highlight(row){
     this.selectedRowIndex = row.id;
