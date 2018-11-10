@@ -31,7 +31,8 @@ export class CoffeeInformationComponent implements OnInit {
   coffeeInProcess: boolean = false;
   jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
 
-trigger: string = '0';
+  trigger: string = "2";
+  wait: string = "0";
 
   constructor(private httpService: HttpService) {}
 
@@ -46,10 +47,12 @@ trigger: string = '0';
     }
     else {
       this.coffeeInProcess = true;
+      while(this.wait === "0") {
       this.httpService.sendData(this.trigger).subscribe(res => {
         console.log(res); 
       }
     );
+  }
     }
   }
 
