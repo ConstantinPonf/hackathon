@@ -11,7 +11,6 @@ const httpOptions = {
 
 @Injectable()
 export class HttpService {
-  url = 'http://192.168.0.100:8080/RobotinoApp/Servlet';
   url = 'http://localhost:8080';
   id = 1;
   constructor(private http: HttpClient) { }

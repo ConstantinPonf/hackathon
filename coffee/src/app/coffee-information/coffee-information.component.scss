@@ -1,6 +1,13 @@
 table {
-    width: 100%;
-  }
+  width: 90%;
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+mat-header-cell {
+  display:flex;
+  justify-content:flex-end;
+}
 
 .example-button-row button,
 .example-button-row a {
