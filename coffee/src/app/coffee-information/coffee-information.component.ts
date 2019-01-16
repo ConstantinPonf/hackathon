@@ -96,10 +96,10 @@ export class CoffeeInformationComponent implements OnInit {
       this.coffeeInProcess = true;
       console.log('Going to while');
       while (this.wait === '0') {
-        this.httpService.sendData(this.trigger).subscribe(res => {
-        console.log(res);
-        this.wait = res;
-        });
+        // this.httpService.sendData(this.trigger).subscribe(res => {
+        // console.log(res);
+        // this.wait = res;
+        // });
         await this.delay(3000);
     }
     this.coffeeInProcess = false;
