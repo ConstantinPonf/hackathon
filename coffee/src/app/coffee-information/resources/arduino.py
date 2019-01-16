@@ -5,21 +5,12 @@ import http
 import urllib.request
 
 
-ser = serial.Serial('COM3', 9600,timeout = 1000)
-triggered = False
+ser = serial.Serial('/dev/ttyS0', 9600,timeout = 1000)
 
-def request(JJquery):
-    f = urllib.request.urlopen("http://localhost:8081/test?" + JJquery)
+def request(path):
+    f = urllib.request.urlopen("http://localhost:8080/" + path)
     s = f.read().decode("utf-8")
     return s
-
-def getQuery():
-    ret = "triggered="
-    if triggered:
-        ret = ret +  "1"
-    else:
-        ret = ret + "0"
-    return ret
 
 def setState(s):
     if s == "1":
@@ -31,12 +22,6 @@ def setState(s):
 while True:
     input = ser.readline()
     
-    if ("TRIGGER" in input.decode("utf-8") ):
-        triggered = True
-        s = getQuery()
-        s = request(s)
-    else:
-        s = getQuery()
-        s = request(s)
-        setState(s)
+    if ("Card UID:" in input.decode("utf-8") ):
+        print (ser.readline())
     
