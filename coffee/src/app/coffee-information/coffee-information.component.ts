@@ -1,23 +1,37 @@
-import { Component, OnInit, NgModule } from '@angular/core';
-import { Coffee } from '../coffee'
+import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { timeout } from 'q';
-import { SelectMultipleControlValueAccessor } from '@angular/forms';
+import {MatDialog, MatDialogConfig} from '@angular/material';
+import {DialogComponent} from '../dialog/dialog.component';
+import {CloseDialogService} from '../shared/closeDialog-service';
 
 export interface CoffeeSorts {
   id: number;
-  thumbnail: string,
-  name: string,
-  description: string,
-  price: number
+  thumbnail: string;
+  name: string;
+  description: string;
+  price: number;
 }
 
 const ELEMENT_DATA: CoffeeSorts[] = [
-  {id: 1, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10386856312862/C-0004-2000x2000.png?impolicy=product&imwidth=65", name: 'Espresso Cosi', description: 'Fruity', price: 1},
-  {id: 2, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10386857492510/C-0023-2000x2000.png?impolicy=product&imwidth=65", name: 'Ristretto', description: 'Powerful and Contrasting', price: 1},
-  {id: 3, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10840367792158/C-0359-India-2000x2000.png?impolicy=product&imwidth=65", name: 'Master Origin India', description: 'Intense and Spicy', price: 1},
-  {id: 4, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/10820727865374/C-0360-Indonesia-2000x2000.png?impolicy=product&imwidth=65", name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1},
-  {id: 5, thumbnail: "https://www.nespresso.com/ecom/medias/sys_master/public/11761093050398/C-0372-Paris-Macaron-2000x2000.png?impolicy=product&imwidth=65", name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1}
+  {id: 1,
+    thumbnail: 'https://www.nespresso.com/ecom/medias/sys_master/public/10386856312862/C-0004-2000x2000.png?impolicy=product&imwidth=65',
+    name: 'Espresso Cosi', description: 'Fruity', price: 1},
+  {id: 2,
+    thumbnail: 'https://www.nespresso.com/ecom/medias/sys_master/public/10386857492510/C-0023-2000x2000.png?impolicy=product&imwidth=65',
+    name: 'Ristretto', description: 'Powerful and Contrasting', price: 1},
+  {id: 3,
+    thumbnail:
+      'https://www.nespresso.com/ecom/medias/sys_master/public/10840367792158/C-0359-India-2000x2000.png?impolicy=product&imwidth=65',
+    name: 'Master Origin India', description: 'Intense and Spicy', price: 1},
+  {id: 4,
+    thumbnail:
+      'https://www.nespresso.com/ecom/medias/sys_master/public/10820727865374/C-0360-Indonesia-2000x2000.png?impolicy=product&imwidth=65',
+    name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1},
+  {id: 5,
+    thumbnail:
+      'https://www.nespresso.com/ecom/medias/sys' +
+      '_master/public/11761093050398/C-0372-Paris-Macaron-2000x2000.png?impolicy=product&imwidth=65',
+    name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1}
 ];
 
 @Component({
@@ -29,44 +43,73 @@ export class CoffeeInformationComponent implements OnInit {
   displayedColumns: string[] = ['id', 'thumbnail', 'name', 'description', 'price'];
   dataSource = ELEMENT_DATA;
 
-  selectedRowIndex: number = -1;
-  coffeeInProcess: boolean = false;
-  jasonFile: String = "C:\Users\const\Documents\hackathon\arduinoCom"
+  selectedRowIndex = -1;
+  coffeeInProcess = false;
+  // jasonFile: String = 'C:\Users\const\Documents\hackathon\arduinoCom';
 
-  trigger: string = "2";
-  wait: string = "0";
+  trigger = '2';
+  wait = '0';
 
-  constructor(private httpService: HttpService) {}
+  constructor(private httpService: HttpService, private dialog: MatDialog,
+              private closeDialogService: CloseDialogService) {}
 
-  highlight(row){
+  highlight(row) {
     this.selectedRowIndex = row.id;
+
+    setTimeout(() => {
+        this.resetRow();
+        this.coffeeInProcess = false;
+      },
+      10000);
   }
 
+  resetRow() {
+    this.selectedRowIndex = -1;
+    this.coffeeInProcess = false;
+  }
 
-  async loading() {
-    
-    if(this.selectedRowIndex === -1) {
-      window.alert("Es ist kein Kaffee ausgewählt!");
+  openDialog() {
+    if (this.coffeeInProcess === true) {
+      const dialogConfig = new MatDialogConfig();
+
+      dialogConfig.disableClose = true;
+      dialogConfig.autoFocus = true;
+      dialogConfig.hasBackdrop = true;
+
+      this.resetRow();
+      this.dialog.open(DialogComponent, dialogConfig);
+      this.sendMessage();
+      this.httpService.sendData(this.trigger);
+    } else {
+      this.coffeeInProcess = false;
     }
-    else {
+  }
+
+  sendMessage(): void {
+    this.closeDialogService.sendMessage('Message from Coffee information component to dialog component!');
+  }
+
+   async loading() {
+    if (this.selectedRowIndex === -1) {
+      window.alert('No coffee selected!');
+    } else {
       this.coffeeInProcess = true;
-      console.log("Going to while");
-      while(this.wait === "0") {
+      console.log('Going to while');
+      while (this.wait === '0') {
         this.httpService.sendData(this.trigger).subscribe(res => {
         console.log(res);
-        this.wait = res; 
+        this.wait = res;
         });
         await this.delay(3000);
     }
     this.coffeeInProcess = false;
-    window.alert("Kaffee wird zubereitet...\n\nNutzer: -1,0\nHändler: +0,7\nPlantage: +0,3");
+    window.alert('Kaffee wird zubereitet...\n\nNutzer: -1,0\nHändler: +0,7\nPlantage: +0,3');
     }
   }
 
   ngOnInit () {}
 
-  private delay(ms: number)
-  {
+  private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
   }
 }
