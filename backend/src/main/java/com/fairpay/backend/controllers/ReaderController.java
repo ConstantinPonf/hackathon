@@ -23,4 +23,7 @@ public class ReaderController {
     public boolean getOrdered() {
         return statusService.getOrdered();
     }
+
+    @GetMapping("/test")
+    public boolean getTest() { return true; }
 }
