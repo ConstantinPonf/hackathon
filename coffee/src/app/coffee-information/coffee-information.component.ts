@@ -85,13 +85,14 @@ export class CoffeeInformationComponent implements OnInit {
     this.closeDialogService.sendMessage('Message from Coffee information component to dialog component!');
   }
 
+  
    async loading() {
     if (this.selectedRowIndex === -1) {
       window.alert('No coffee selected!');
     } else {
       this.coffeeInProcess = true;
       console.log('Going to while');
-      wait;
+      var wait = '0';
       while (wait === '0') {
         // this.httpService.sendData(this.trigger).subscribe(res => {
         // console.log(res);
