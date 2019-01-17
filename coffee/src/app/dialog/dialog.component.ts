@@ -3,6 +3,7 @@ import {MatDialogRef} from '@angular/material';
 import {CloseDialogService} from '../shared/closeDialog-service';
 import {Subscription} from 'rxjs';
 import {ChangePopupTextService} from '../shared/changePopupText-service';
+import {BrewedCoffeeService} from '../shared/brewedCoffee-service';
 
 @Component({
   selector: 'app-dialog',
@@ -19,7 +20,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   scannedTrue = false;
 
   constructor(private dialogRef: MatDialogRef<DialogComponent>, private closeDialogService: CloseDialogService,
-              private changePopupText: ChangePopupTextService) {
+              private changePopupText: ChangePopupTextService, brewedCoffeeService: BrewedCoffeeService) {
 
     this.subscription = this.closeDialogService.getMessage().subscribe(message => {
       this.message = message;
@@ -33,6 +34,7 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.message2 = message;
       this.scannedTrue = true;
       setTimeout(() => {
+          brewedCoffeeService.coffeeBrewed(true);
           this.scannedTrue = false;
           this.close();
         },
