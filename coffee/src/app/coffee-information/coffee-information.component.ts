@@ -80,7 +80,8 @@ export class CoffeeInformationComponent implements OnInit {
       dialogConfig.hasBackdrop = true;
 
       this.httpService.sendData(this.selectedRowIndex);
-
+      this.dialog.open(DialogComponent, dialogConfig);
+      this.sendMessage();
       while (this.chipScannedService.scanned === false) {
         setTimeout(() => {
             this.chipScannedService.getData();
@@ -91,10 +92,9 @@ export class CoffeeInformationComponent implements OnInit {
       if (this.chipScannedService.scanned === true) {
         this.dialog.open(DialogComponent, dialogConfig);
         this.sendMessage2();
-      } else {
-        this.dialog.open(DialogComponent, dialogConfig);
-        this.sendMessage();
-      }
+      } 
+
+      
 
       this.resetRow();
     } else {
