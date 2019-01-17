@@ -9,17 +9,20 @@ const httpOptions = {
   })
 }
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class HttpService {
-  url = 'http://localhost:8080/coffee';
+  url = 'http://localhost:8080/coffee/';
   id = 1;
   constructor(private http: HttpClient) { }
-  sendData(data: any) {
-    return this.http.put('http://localhost:8080/coffee/' + this.id, {
-      responseType: 'text'
-     });
-   /*.pipe(
-     catchError(val => of('I caught:'+val));
-   )*/
+
+  sendData(id: number) {
+    return this.http.post<boolean>(this.url + 'order', id).subscribe(po => {
+       console.log(po);
+    },
+      error => {
+      console.log(error);
+      });
  }
 }
