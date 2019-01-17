@@ -15,7 +15,7 @@ export class HttpService {
   id = 1;
   constructor(private http: HttpClient) { }
   sendData(data: any) {
-    return this.http.put('http://localhost:8080/coffee/' + this.id, {
+    return this.http.post('http://localhost:8080/coffee/' + this.id, {
       responseType: 'text'
      });
    /*.pipe(
