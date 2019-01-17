@@ -47,9 +47,6 @@ export class CoffeeInformationComponent implements OnInit {
   coffeeInProcess = false;
   // jasonFile: String = 'C:\Users\const\Documents\hackathon\arduinoCom';
 
-  trigger = '2';
-  wait = '0';
-
   constructor(private httpService: HttpService, private dialog: MatDialog,
               private closeDialogService: CloseDialogService) {}
 
@@ -79,7 +76,6 @@ export class CoffeeInformationComponent implements OnInit {
       this.resetRow();
       this.dialog.open(DialogComponent, dialogConfig);
       this.sendMessage();
-      this.httpService.sendData(this.trigger);
     } else {
       this.coffeeInProcess = false;
     }
@@ -95,7 +91,8 @@ export class CoffeeInformationComponent implements OnInit {
     } else {
       this.coffeeInProcess = true;
       console.log('Going to while');
-      while (this.wait === '0') {
+      wait;
+      while (wait === '0') {
         // this.httpService.sendData(this.trigger).subscribe(res => {
         // console.log(res);
         // this.wait = res;
