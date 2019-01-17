@@ -25,9 +25,10 @@ export class DialogComponent implements OnInit, OnDestroy {
     this.subscription = this.closeDialogService.getMessage().subscribe(message => {
       this.message = message;
       setTimeout(() => {
+          this.scannedTrue = false;
           this.close();
         },
-        5000);
+        10000);
     });
 
     this.subscription2 = this.changePopupText.getMessage().subscribe( message => {
@@ -38,7 +39,7 @@ export class DialogComponent implements OnInit, OnDestroy {
           this.scannedTrue = false;
           this.close();
         },
-        5000);
+        10000);
     });
   }
 
