@@ -16,9 +16,13 @@ public class CoffeeController {
     public CoffeeController(StatusService statusService) { this.statusService = statusService; }
 
     @PostMapping("/order")
-    public boolean order(@RequestBody int id, HttpServletRequest request) {
-        System.out.println("wtf");
+    public boolean order(@RequestBody int id) {
         statusService.setOrdered(id);
         return true;
+    }
+
+    @GetMapping("/scanned")
+    public boolean scanned(){
+        return statusService.getIdRead();
     }
 }

@@ -18,7 +18,7 @@ void setup() {
   mfrc522.PCD_Init();
   pinMode(2, OUTPUT);
   digitalWrite(2, HIGH);
-  
+
 
 }
 
@@ -39,18 +39,13 @@ void loop() {
   Serial.print(F("PICC type: "));
   MFRC522::PICC_Type piccType = mfrc522.PICC_GetType(mfrc522.uid.sak);
   Serial.println(mfrc522.PICC_GetTypeName(piccType));
-  /* if (mfrc522.PICC_IsNewCardPresent()) {
 
-     //Start
-     Serial.println("TRIGGER");
-     delay(1000);
-     //Serial.println();
-     digitalWrite(2, LOW);
-     delay(3000);
-     digitalWrite(2, HIGH);
-     delay(2000);
-    }
-    Serial.println();*/
+  delay(1000);
+  digitalWrite(2, LOW);
+  delay(3000);
+  digitalWrite(2, HIGH);
+  delay(2000);
+
   // Halt PICC
   mfrc522.PICC_HaltA();
   // Stop encryption on PCD

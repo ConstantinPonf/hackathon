@@ -7,33 +7,44 @@ public class Status {
     private int coffeeOrdered = -1;
     private String id;
 
-    public Status() {}
-
-    public boolean getOrdered() { return ordered; }
-    public boolean getIdRead() { return idRead; }
-
-    public void setOrdered(int coffeeOrdered) {
-        ordered = true;
-        this.coffeeOrdered = coffeeOrdered;
+    public Status() {
     }
 
-    public void setId(String id) {
-        idRead = true;
-        this.id = id;
-        if(idRead && ordered) {
-            // TODO: Transfer.
+    public boolean getOrdered() {
+        return ordered;
+    }
+
+    public boolean getIdRead() {
+        return idRead;
+    }
+
+    public void setOrdered(int coffeeOrdered) {
+        if (!ordered) {
+            ordered = true;
+            this.coffeeOrdered = coffeeOrdered;
         }
     }
 
-    public int getCoffeeOrdered() { return coffeeOrdered; }
+    public void setId(String id) {
+        if (!idRead) {
+            idRead = true;
+            this.id = id;
+        }
+    }
 
-    public String getId() { return id; }
+    public int getCoffeeOrdered() {
+        return coffeeOrdered;
+    }
 
-    public void reset(){
+    public String getId() {
+        return id;
+    }
+
+    public void reset() {
         this.id = "";
         this.coffeeOrdered = -1;
         this.ordered = false;
         this.idRead = false;
-        
+
     }
 }

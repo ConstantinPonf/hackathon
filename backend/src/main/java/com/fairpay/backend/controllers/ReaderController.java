@@ -12,24 +12,23 @@ public class ReaderController {
     private StatusService statusService;
 
     @Autowired
-    public ReaderController(StatusService statusService) { this.statusService = statusService; }
-
-    @GetMapping("/ordered")
-    public boolean getOrdered() {
-        return statusService.getOrdered();
+    public ReaderController(StatusService statusService) {
+        this.statusService = statusService;
     }
 
     @PostMapping("/uid")
-    public String getTest(@RequestBody byte[] bytes) { 
-        String uid = new String(bytes);
-        uid = uid.substring(12, 23);
-        String temp ="0x";
-        for(String s: uid.split("\\+")){
-            temp += s;
+    public String getTest(@RequestBody byte[] bytes) {
+        if (!statusService.getIdRead()) {
+            String uid = new String(bytes);
+            uid = uid.substring(12, 23);
+            String temp = "0x";
+            for (String s : uid.split("\\+")) {
+                temp += s;
+            }
+            uid = temp;
+            statusService.setId(uid);
+            return uid;
         }
-        uid = temp;
-        statusService.setId(uid);
-        System.out.println(uid);
-        return uid;
-        }
+        return "";
+    }
 }
