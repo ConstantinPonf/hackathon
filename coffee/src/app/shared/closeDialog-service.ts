@@ -5,7 +5,7 @@ import { Observable, BehaviorSubject } from 'rxjs';
  * component.  **/
 @Injectable({ providedIn: 'root' })
 export class CloseDialogService {
-  private subject = new BehaviorSubject<any>([]);
+  private subject = new BehaviorSubject<any>();
 
   sendMessage(message: string) {
     this.subject.next({ text: message });

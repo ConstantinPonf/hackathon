@@ -24,7 +24,6 @@ export class DialogComponent implements OnInit, OnDestroy {
     this.subscription = this.closeDialogService.getMessage().subscribe(message => {
       this.message = message;
       setTimeout(() => {
-        console.log('Sub2');
           this.close();
         },
         5000);
@@ -34,8 +33,7 @@ export class DialogComponent implements OnInit, OnDestroy {
       this.message2 = message;
       this.scannedTrue = true;
       setTimeout(() => {
-        this.scannedTrue = false;
-        console.log('Sub2');
+          this.scannedTrue = false;
           this.close();
         },
         5000);
