@@ -14,7 +14,7 @@ const httpOptions = {
 })
 export class ChipScannedService {
   url = 'http://localhost:8080/coffee/';
-  scanned: boolean;
+  scanned = false;
 
   constructor(private http: HttpClient) { }
 

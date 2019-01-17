@@ -84,12 +84,14 @@ export class CoffeeInformationComponent implements OnInit {
       this.chipScannedService.getData();
 
       if (this.chipScannedService.scanned === true) {
+        this.dialog.open(DialogComponent, dialogConfig);
         this.sendMessage2();
+      } else {
+        this.dialog.open(DialogComponent, dialogConfig);
+        this.sendMessage();
       }
 
       this.resetRow();
-      this.dialog.open(DialogComponent, dialogConfig);
-      this.sendMessage();
     } else {
       this.coffeeInProcess = false;
     }
