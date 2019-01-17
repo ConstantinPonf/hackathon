@@ -15,9 +15,7 @@ export class HttpService {
   id = 1;
   constructor(private http: HttpClient) { }
   sendData(data: any) {
-    return this.http.post('http://localhost:8080/coffee/' + this.id, {
-      responseType: 'text'
-     });
+    return this.http.post<boolean>('http://localhost:8080/coffee/order', this.id);
    /*.pipe(
      catchError(val => of('I caught:'+val));
    )*/

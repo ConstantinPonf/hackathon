@@ -14,8 +14,8 @@ public class CoffeeController {
     @Autowired
     public CoffeeController(StatusService statusService) { this.statusService = statusService; }
 
-    @PostMapping("/{id}")
-    public boolean order(@PathVariable int id, HttpServletRequest request) {
+    @PostMapping("/order")
+    public boolean order(@RequestBody int id, HttpServletRequest request) {
         System.out.println("wtf");
         statusService.setOrdered(id);
         return true;
