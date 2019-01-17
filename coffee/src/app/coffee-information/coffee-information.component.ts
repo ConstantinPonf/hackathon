@@ -81,7 +81,12 @@ export class CoffeeInformationComponent implements OnInit {
 
       this.httpService.sendData(this.selectedRowIndex);
 
-      this.chipScannedService.getData();
+      while (this.chipScannedService.scanned === false) {
+        setTimeout(() => {
+            this.chipScannedService.getData();
+          },
+          500);
+      }
 
       if (this.chipScannedService.scanned === true) {
         this.dialog.open(DialogComponent, dialogConfig);
