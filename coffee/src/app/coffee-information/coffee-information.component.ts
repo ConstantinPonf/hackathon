@@ -71,7 +71,7 @@ export class CoffeeInformationComponent implements OnInit {
     this.coffeeInProcess = false;
   }
 
-  openDialog() {
+ async openDialog() {
     if (this.coffeeInProcess === true) {
       const dialogConfig = new MatDialogConfig();
 
@@ -83,18 +83,16 @@ export class CoffeeInformationComponent implements OnInit {
       this.dialog.open(DialogComponent, dialogConfig);
       this.sendMessage();
       while (this.chipScannedService.scanned === false) {
-        setTimeout(() => {
-            this.chipScannedService.getData();
-          },
-          500);
+          await this.delay(500);
+          this.chipScannedService.getData();
+          console.log(this.chipScannedService.scanned);
       }
-
+      
       if (this.chipScannedService.scanned === true) {
         this.dialog.open(DialogComponent, dialogConfig);
         this.sendMessage2();
       } 
-
-      
+      this.chipScannedService.scanned =false;
 
       this.resetRow();
     } else {
