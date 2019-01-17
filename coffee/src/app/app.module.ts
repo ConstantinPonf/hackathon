@@ -11,6 +11,7 @@ import { AppComponent } from './app.component';
 import { CoffeeInformationComponent } from './coffee-information/coffee-information.component';
 import { DialogComponent } from './dialog/dialog.component';
 import {MatDialogModule, MatIconModule} from '@angular/material';
+import {ChipScannedService} from './shared/chipScanned-service';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {MatDialogModule, MatIconModule} from '@angular/material';
     MatIconModule
   ],
   providers: [
-    HttpService
+    HttpService,
+    ChipScannedService,
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent],

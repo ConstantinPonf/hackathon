@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import {MatDialog, MatDialogConfig, MatIconRegistry} from '@angular/material';
+import {MatDialog, MatDialogConfig} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
 import {CloseDialogService} from '../shared/closeDialog-service';
-import {DomSanitizer} from '@angular/platform-browser';
+import {ChipScannedService} from '../shared/chipScanned-service';
+import {ChangePopupTextService} from '../shared/changePopupText-service';
 
 export interface CoffeeSorts {
   id: number;
@@ -49,10 +50,10 @@ export class CoffeeInformationComponent implements OnInit {
   // jasonFile: String = 'C:\Users\const\Documents\hackathon\arduinoCom';
 
   constructor(private httpService: HttpService, private dialog: MatDialog,
-              private closeDialogService: CloseDialogService, iconRegistry: MatIconRegistry, sanitizer:
-              DomSanitizer) {
-    iconRegistry.addSvgIcon('money',
-      sanitizer.bypassSecurityTrustResourceUrl('assets/money.svg'));
+              private closeDialogService: CloseDialogService, private chipScannedService:
+              ChipScannedService, private changePopupTextService: ChangePopupTextService) { }
+
+  ngOnInit () {
   }
 
   highlight(row) {
@@ -80,12 +81,22 @@ export class CoffeeInformationComponent implements OnInit {
 
       this.httpService.sendData(this.selectedRowIndex);
 
+      this.chipScannedService.getData();
+
+      if (this.chipScannedService.scanned === true) {
+        this.sendMessage2();
+      }
+
       this.resetRow();
       this.dialog.open(DialogComponent, dialogConfig);
       this.sendMessage();
     } else {
       this.coffeeInProcess = false;
     }
+  }
+
+  sendMessage2(): void {
+    this.changePopupTextService.sendMessage('Change Pop up text!');
   }
 
   sendMessage(): void {
@@ -110,8 +121,6 @@ export class CoffeeInformationComponent implements OnInit {
     window.alert('Kaffee wird zubereitet...\n\nNutzer: -1,0\nHändler: +0,7\nPlantage: +0,3');
     }
   }
-
-  ngOnInit () {}
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
