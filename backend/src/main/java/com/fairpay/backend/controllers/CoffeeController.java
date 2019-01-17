@@ -15,8 +15,9 @@ public class CoffeeController {
     public CoffeeController(StatusService statusService) { this.statusService = statusService; }
 
     @PostMapping("/{id}")
-    public void order(@PathVariable int id, HttpServletRequest request) {
+    public boolean order(@PathVariable int id, HttpServletRequest request) {
         System.out.println("wtf");
         statusService.setOrdered(id);
+        return true;
     }
 }
