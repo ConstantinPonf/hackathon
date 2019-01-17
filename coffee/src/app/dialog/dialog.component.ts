@@ -1,9 +1,9 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {MatDialogRef} from '@angular/material';
-import {CloseDialogService} from '../shared/closeDialog-service';
-import {Subscription} from 'rxjs';
-import {ChangePopupTextService} from '../shared/changePopupText-service';
-import {BrewedCoffeeService} from '../shared/brewedCoffee-service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material';
+import { CloseDialogService } from '../shared/closeDialog-service';
+import { Subscription } from 'rxjs';
+import { ChangePopupTextService } from '../shared/changePopupText-service';
+import { ClosePopupService } from '../shared/closePopup-service';
 
 @Component({
   selector: 'app-dialog',
@@ -19,33 +19,38 @@ export class DialogComponent implements OnInit, OnDestroy {
   subscription2: Subscription;
   scannedTrue = false;
 
-  constructor(private dialogRef: MatDialogRef<DialogComponent>, private closeDialogService: CloseDialogService,
-              private changePopupText: ChangePopupTextService, brewedCoffeeService: BrewedCoffeeService) {
+  messageClose: any;
+  subscriptionClose: Subscription;
 
+  constructor(private dialogRef: MatDialogRef<DialogComponent>,
+    private closeDialogService: CloseDialogService,
+    private changePopupText: ChangePopupTextService,
+    private closePopupService: ClosePopupService) {
+
+    console.log("sub 1");
     this.subscription = this.closeDialogService.getMessage().subscribe(message => {
       this.message = message;
-      setTimeout(() => {
-          this.scannedTrue = false;
-          this.close();
-        },
-        10000);
     });
-
-    this.subscription2 = this.changePopupText.getMessage().subscribe( message => {
+    console.log("sub 2");
+    this.subscription2 = this.changePopupText.getMessage().subscribe(message => {
       this.message2 = message;
       this.scannedTrue = true;
-      setTimeout(() => {
-          brewedCoffeeService.coffeeBrewed(true);
-          this.scannedTrue = false;
-          this.close();
-        },
-        10000);
+    });
+    console.log("sub 3");
+    this.subscriptionClose = this.closePopupService.getMessage().subscribe(message => {
+      console.log("I am called! MSG: " + message.text );
+      if (message.text === 'close') {
+        console.log("CLOSE")
+        this.close();
+      }
     });
   }
 
   ngOnDestroy() {
+    console.log("Unsubscribe POPUP")
     this.subscription.unsubscribe();
     this.subscription2.unsubscribe();
+    this.subscriptionClose.unsubscribe();
   }
 
   ngOnInit() {
@@ -54,5 +59,4 @@ export class DialogComponent implements OnInit, OnDestroy {
   close() {
     this.dialogRef.close();
   }
-
 }

@@ -19,7 +19,6 @@ export class HttpService {
 
   sendData(id: number) {
     return this.http.post<boolean>(this.url + 'order', id).subscribe(po => {
-       console.log(po);
     },
       error => {
       console.log(error);

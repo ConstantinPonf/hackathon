@@ -47,4 +47,14 @@ public class Status {
         this.idRead = false;
 
     }
+
+    @Override
+    public String toString(){
+        String result = "";
+        result += "Ordered: " + ordered +"\n";
+        result += "Ordered Coffe ID: "+coffeeOrdered+"\n";
+        result += "Did Read Client ID: " + idRead +"\n";
+        result += "Client ID: "+id+"\n";
+        return result;
+    }
 }

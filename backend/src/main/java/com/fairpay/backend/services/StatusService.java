@@ -30,4 +30,9 @@ public class StatusService {
     public void reset(){
         state.reset();
     }
+
+    @Override
+    public String toString(){
+        return state.toString();
+    }
 }

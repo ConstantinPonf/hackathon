@@ -17,9 +17,8 @@ export class BrewedCoffeeService {
 
   constructor(private http: HttpClient) { }
 
-  coffeeBrewed(brewed: boolean) {
-    return this.http.post<boolean>(this.url + 'brewed', brewed).subscribe(po => {
-        console.log(po);
+  coffeeBrewed() {
+    return this.http.get<boolean>(this.url + 'brewed').subscribe(po => {
       },
       error => {
         console.log(error);

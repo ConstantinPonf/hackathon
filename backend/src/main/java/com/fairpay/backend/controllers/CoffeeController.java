@@ -4,8 +4,6 @@ import com.fairpay.backend.services.StatusService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import javax.servlet.http.HttpServletRequest;
-
 @CrossOrigin("http://localhost:4200")
 @RestController
 @RequestMapping("coffee")
@@ -18,17 +16,20 @@ public class CoffeeController {
     @PostMapping("/order")
     public boolean order(@RequestBody int id) {
         statusService.setOrdered(id);
+        System.out.println(statusService.toString());
         return true;
     }
 
     @GetMapping("/scanned")
     public boolean scanned(){
+        System.out.println(statusService.toString());
         return statusService.getIdRead();
     }
 
     @GetMapping("/brewed")
     public boolean brewed(){
         statusService.reset();
+        System.out.println(statusService.toString());
         return true;
     }
 }
