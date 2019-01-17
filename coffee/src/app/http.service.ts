@@ -11,13 +11,11 @@ const httpOptions = {
 
 @Injectable()
 export class HttpService {
-  url = 'http://localhost:8080';
+  url = 'http://localhost:8080/coffee';
   id = 1;
   constructor(private http: HttpClient) { }
   sendData(data: any) {
-    return this.http.put('http://localhost:8080/coffee/' + this.id, {
-      responseType: 'text'
-     });
+    return this.http.put<>(this.url + this.id, null);
    /*.pipe(
      catchError(val => of('I caught:'+val));
    )*/
