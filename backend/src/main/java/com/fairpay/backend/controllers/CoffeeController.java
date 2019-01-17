@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin(origins = "http://localhost:4200")
 @RestController
 @RequestMapping("coffee")
 public class CoffeeController {
@@ -15,7 +14,7 @@ public class CoffeeController {
     @Autowired
     public CoffeeController(StatusService statusService) { this.statusService = statusService; }
 
-    @PutMapping("/{id}")
+    @PostMapping("/{id}")
     public void order(@PathVariable int id, HttpServletRequest request) {
         System.out.println("wtf");
         statusService.setOrdered(id);

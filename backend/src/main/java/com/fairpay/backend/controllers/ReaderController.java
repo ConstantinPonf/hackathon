@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@CrossOrigin
 @RestController
 @RequestMapping("reader")
 public class ReaderController {
@@ -16,12 +15,15 @@ public class ReaderController {
     public ReaderController(StatusService statusService) { this.statusService = statusService; }
 
     @PutMapping("/{uid}")
-    public void setUID(@PathVariable String uid, HttpServletRequest request) {
-
+    public boolean setUID(@PathVariable String uid, HttpServletRequest request) {
+        return true;
     }
 
     @GetMapping("/ordered")
     public boolean getOrdered() {
         return statusService.getOrdered();
     }
+
+    @GetMapping("/test")
+    public boolean getTest() { return true; }
 }
