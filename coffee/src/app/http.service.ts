@@ -13,13 +13,13 @@ const httpOptions = {
   providedIn: 'root'
 })
 export class HttpService {
-  url = 'http://localhost:8080/coffee';
+  url = 'http://localhost:8080/coffee/';
   id = 1;
   constructor(private http: HttpClient) { }
 
   sendData(id: number) {
-    return this.http.post<>(this.url + id, id).subscribe(number => {
-       console.log(number);
+    return this.http.post<boolean>(this.url + 'order', id).subscribe(po => {
+       console.log(po);
     },
       error => {
       console.log(error);
