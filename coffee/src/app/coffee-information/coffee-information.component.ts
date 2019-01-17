@@ -63,9 +63,7 @@ export class CoffeeInformationComponent implements OnInit {
 
   constructor(private httpService: HttpService,
     private dialog: MatDialog,
-    private closeDialogService: CloseDialogService,
     private chipScannedService: ChipScannedService,
-    private changePopupTextService: ChangePopupTextService,
     private brewedCoffeeService: BrewedCoffeeService,
     private closePopupService: ClosePopupService) { }
 
@@ -93,7 +91,6 @@ export class CoffeeInformationComponent implements OnInit {
 
     this.httpService.sendData(this.selectedRowIndex);
     this.dialog.open(DialogComponent, dialogConfig);
-    this.sendMessage();
 
     let counter: number = 0;
     while (this.chipScannedService.scanned === false) {
@@ -107,35 +104,28 @@ export class CoffeeInformationComponent implements OnInit {
       if (counter === 9) {
         this.resetRow();
         this.brewedCoffeeService.coffeeBrewed();
-        this.closePopup();
+        this.sendMessage('close');
         return;
       }
       counter++;
     }
 
-
-    //this.dialog.open(DialogComponent, dialogConfig);
-    this.sendMessage2();
+    this.sendMessage('prepare');
     await this.delay(2500);
 
     this.chipScannedService.scanned = false;
     this.resetRow();
     this.brewedCoffeeService.coffeeBrewed();
-    this.closePopup();
+    this.sendMessage('close');
+    this.sendMessage('');
 
   }
 
-  sendMessage2(): void {
-    this.changePopupTextService.sendMessage('Change Pop up text!');
+  sendMessage(msg : string): void {
+    this.closePopupService.sendMessage(msg);
+    this.closePopupService.sendMessage(msg);
   }
 
-  sendMessage(): void {
-    this.closeDialogService.sendMessage('Message from Coffee information component to dialog component!');
-  }
-
-  closePopup(): void{
-    this.closePopupService.sendMessage('close');
-  }
   loading() {
     if (this.selectedRowIndex === -1) {
       window.alert('No coffee selected!');
