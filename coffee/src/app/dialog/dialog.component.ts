@@ -1,8 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material';
-import { CloseDialogService } from '../shared/closeDialog-service';
 import { Subscription } from 'rxjs';
-import { ChangePopupTextService } from '../shared/changePopupText-service';
 import { ClosePopupService } from '../shared/closePopup-service';
 
 @Component({

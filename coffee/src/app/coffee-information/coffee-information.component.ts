@@ -101,10 +101,12 @@ export class CoffeeInformationComponent implements OnInit {
       //ONLY FOR TESTING
       if(counter == 5)
         this.chipScannedService.scanned = true;
+      //ONLY FOR TESTING END
       if (counter === 9) {
         this.resetRow();
         this.brewedCoffeeService.coffeeBrewed();
         this.sendMessage('close');
+        this.sendMessage('');
         return;
       }
       counter++;
