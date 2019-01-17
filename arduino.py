@@ -5,7 +5,7 @@ import http
 import urllib.request
 
 
-ser = serial.Serial('/dev/ttyACM0', 9600)
+ser = serial.Serial('/dev/ttyACM1', 9600)
 
 def request(path,information):
     f = urllib.request.urlopen("http://localhost:8080/" + path,information)
@@ -14,8 +14,6 @@ def request(path,information):
         
 while True:
     input = ser.readline()
-    print(input)
     if ("Card UID:" in input.decode("utf-8") ):
-        f = urllib.request.urlopen("http://localhost:8080/reader",input)
-        s = f.read().decode("boolean")
-        print(s)
+        f = urllib.request.urlopen("http://localhost:8080/reader/uid",input)
+        print("request send " + input.decode('utf-8')+ "did get: \n"+f.read().decode('utf-8'))

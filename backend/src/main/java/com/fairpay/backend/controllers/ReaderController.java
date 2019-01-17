@@ -14,16 +14,22 @@ public class ReaderController {
     @Autowired
     public ReaderController(StatusService statusService) { this.statusService = statusService; }
 
-    @PutMapping("/{uid}")
-    public boolean setUID(@PathVariable String uid, HttpServletRequest request) {
-        return true;
-    }
-
     @GetMapping("/ordered")
     public boolean getOrdered() {
         return statusService.getOrdered();
     }
 
-    @GetMapping("/test")
-    public boolean getTest() { return true; }
+    @PostMapping("/uid")
+    public String getTest(@RequestBody byte[] bytes) { 
+        String uid = new String(bytes);
+        uid = uid.substring(12, 23);
+        String temp ="0x";
+        for(String s: uid.split("\\+")){
+            temp += s;
+        }
+        uid = temp;
+        statusService.setId(uid);
+        System.out.println(uid);
+        return uid;
+        }
 }
