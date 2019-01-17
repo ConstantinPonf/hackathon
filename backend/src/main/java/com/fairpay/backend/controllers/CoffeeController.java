@@ -25,4 +25,10 @@ public class CoffeeController {
     public boolean scanned(){
         return statusService.getIdRead();
     }
+
+    @GetMapping("/brewed")
+    public boolean brewed(){
+        statusService.reset();
+        return true;
+    }
 }
