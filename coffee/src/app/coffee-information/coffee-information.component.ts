@@ -19,31 +19,27 @@ export interface CoffeeSorts {
 const ELEMENT_DATA: CoffeeSorts[] = [
   {
     id: 1,
-    thumbnail: 'https://www.nespresso.com/ecom/medias/sys_master/public/10386856312862/C-0004-2000x2000.png?impolicy=product&imwidth=65',
+    thumbnail: 'assets/EspressoCosi.jp2',
     name: 'Espresso Cosi', description: 'Fruity', price: 1
   },
   {
     id: 2,
-    thumbnail: 'https://www.nespresso.com/ecom/medias/sys_master/public/10386857492510/C-0023-2000x2000.png?impolicy=product&imwidth=65',
+    thumbnail: 'assets/Ristretto.jp2',
     name: 'Ristretto', description: 'Powerful and Contrasting', price: 1
   },
   {
     id: 3,
-    thumbnail:
-      'https://www.nespresso.com/ecom/medias/sys_master/public/10840367792158/C-0359-India-2000x2000.png?impolicy=product&imwidth=65',
+    thumbnail: 'assets/MasterOriginIndia.jp2',
     name: 'Master Origin India', description: 'Intense and Spicy', price: 1
   },
   {
     id: 4,
-    thumbnail:
-      'https://www.nespresso.com/ecom/medias/sys_master/public/10820727865374/C-0360-Indonesia-2000x2000.png?impolicy=product&imwidth=65',
+    thumbnail: 'assets/MasterOriginIndonesia.jp2',
     name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1
   },
   {
     id: 5,
-    thumbnail:
-      'https://www.nespresso.com/ecom/medias/sys' +
-      '_master/public/11761093050398/C-0372-Paris-Macaron-2000x2000.png?impolicy=product&imwidth=65',
+    thumbnail: 'assets/VariationsParisMacaron.png',
     name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1
   }
 ];
@@ -80,9 +76,9 @@ export class CoffeeInformationComponent implements OnInit {
   }
 
   async openDialog() {
-    if (this.selectedRowIndex === -1)
+    if (this.selectedRowIndex === -1) {
       return;
-
+    }
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -92,16 +88,17 @@ export class CoffeeInformationComponent implements OnInit {
     this.httpService.sendData(this.selectedRowIndex);
     this.dialog.open(DialogComponent, dialogConfig);
 
-    let counter: number = 0;
+    let counter = 0;
     while (this.chipScannedService.scanned === false) {
       await this.delay(500);
       this.chipScannedService.getData();
       console.log(this.chipScannedService.scanned);
 
-      //ONLY FOR TESTING
-      if(counter == 5)
+      // ONLY FOR TESTING
+      if (counter === 5) {
         this.chipScannedService.scanned = true;
-      //ONLY FOR TESTING END
+      }
+      // ONLY FOR TESTING END
       if (counter === 9) {
         this.resetRow();
         this.brewedCoffeeService.coffeeBrewed();
@@ -123,7 +120,7 @@ export class CoffeeInformationComponent implements OnInit {
 
   }
 
-  sendMessage(msg : string): void {
+  sendMessage(msg: string): void {
     this.closePopupService.sendMessage(msg);
     this.closePopupService.sendMessage(msg);
   }

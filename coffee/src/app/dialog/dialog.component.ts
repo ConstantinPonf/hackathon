@@ -23,22 +23,24 @@ export class DialogComponent implements OnInit, OnDestroy {
   constructor(private dialogRef: MatDialogRef<DialogComponent>,
     private closePopupService: ClosePopupService) {
 
-    console.log("sub");
-    this.subscriptionClose = this.closePopupService.getMessage().subscribe(message => { 
+    console.log('sub');
+    this.subscriptionClose = this.closePopupService.getMessage().subscribe(message => {
       console.log(message);
-      switch(message.text){
-        case 'close':{
+      switch (message.text) {
+        case 'close': {
           this.close();
+          break;
         }
-        case 'prepare':{
+        case 'prepare': {
           this.scannedTrue = true;
+          break;
         }
       }
     });
   }
 
   ngOnDestroy() {
-    console.log("Unsubscribe POPUP")
+    console.log('Unsubscribe POPUP')
     this.subscriptionClose.unsubscribe();
   }
 
