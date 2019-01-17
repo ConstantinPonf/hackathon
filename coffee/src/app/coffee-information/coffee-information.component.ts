@@ -76,10 +76,11 @@ export class CoffeeInformationComponent implements OnInit {
       dialogConfig.autoFocus = true;
       dialogConfig.hasBackdrop = true;
 
+      this.httpService.sendData(this.selectedRowIndex);
+
       this.resetRow();
       this.dialog.open(DialogComponent, dialogConfig);
       this.sendMessage();
-      this.httpService.sendData(this.trigger);
     } else {
       this.coffeeInProcess = false;
     }

@@ -7,4 +7,7 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   public img_source = 'LogoFooter.png';
+  public img_ua = 'UA.png';
+  public img_ubt = 'UBT.png';
+  public img_tum = 'TUM.png';
 }
