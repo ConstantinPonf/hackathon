@@ -17,6 +17,7 @@ public class CoffeeController {
 
     @PutMapping("/{id}")
     public void order(@PathVariable int id, HttpServletRequest request) {
+        System.out.println("wtf");
         statusService.setOrdered(id);
     }
 }
