@@ -4,9 +4,10 @@ table {
   margin-top: 5%;
 }
 
-mat-header-cell {
-  display:flex;
-  justify-content:flex-end;
+.mat-header-cell {
+  font-family: "Helvetica";
+  font-weight: bold;
+  font-size: 19px;
 }
 
 .example-button-row button,
@@ -18,7 +19,7 @@ mat-header-cell {
 }
 
 .highlight{
-  background: lightblue;
+  background: lightgrey;
 }
 
 .mat-cell {

@@ -10,7 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
 import { CoffeeInformationComponent } from './coffee-information/coffee-information.component';
 import { DialogComponent } from './dialog/dialog.component';
-import {MatDialogModule} from '@angular/material';
+import {MatDialogModule, MatIconModule} from '@angular/material';
 
 @NgModule({
   declarations: [
@@ -23,7 +23,8 @@ import {MatDialogModule} from '@angular/material';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    MatDialogModule
+    MatDialogModule,
+    MatIconModule
   ],
   providers: [
     HttpService

@@ -1,5 +1,5 @@
 .mat-toolbar.mat-primary {
-  background: lightskyblue;
+  background: whitesmoke;
 }
 
 .image {
@@ -13,5 +13,12 @@
   // opacity: .5;
 }
 
+.example-spacer1 {
+  flex: 6 6 auto;
+}
+
+.example-spacer2 {
+  flex: 1 1 auto;
+}
 
 

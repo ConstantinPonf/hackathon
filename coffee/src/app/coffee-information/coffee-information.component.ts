@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import {MatDialog, MatDialogConfig} from '@angular/material';
+import {MatDialog, MatDialogConfig, MatIconRegistry} from '@angular/material';
 import {DialogComponent} from '../dialog/dialog.component';
 import {CloseDialogService} from '../shared/closeDialog-service';
+import {DomSanitizer} from '@angular/platform-browser';
 
 export interface CoffeeSorts {
   id: number;
@@ -48,7 +49,11 @@ export class CoffeeInformationComponent implements OnInit {
   // jasonFile: String = 'C:\Users\const\Documents\hackathon\arduinoCom';
 
   constructor(private httpService: HttpService, private dialog: MatDialog,
-              private closeDialogService: CloseDialogService) {}
+              private closeDialogService: CloseDialogService, iconRegistry: MatIconRegistry, sanitizer:
+              DomSanitizer) {
+    iconRegistry.addSvgIcon('money',
+      sanitizer.bypassSecurityTrustResourceUrl('assets/money.svg'));
+  }
 
   highlight(row) {
     this.selectedRowIndex = row.id;
@@ -87,14 +92,13 @@ export class CoffeeInformationComponent implements OnInit {
     this.closeDialogService.sendMessage('Message from Coffee information component to dialog component!');
   }
 
-  
-   async loading() {
+  async loading() {
     if (this.selectedRowIndex === -1) {
       window.alert('No coffee selected!');
     } else {
       this.coffeeInProcess = true;
       console.log('Going to while');
-      var wait = '0';
+      const wait = '0';
       while (wait === '0') {
         // this.httpService.sendData(this.trigger).subscribe(res => {
         // console.log(res);
