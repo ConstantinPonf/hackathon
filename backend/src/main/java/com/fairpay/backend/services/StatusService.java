@@ -27,4 +27,7 @@ public class StatusService {
         state.setId(id);
     }
 
+    public void reset(){
+        state.reset();
+    }
 }

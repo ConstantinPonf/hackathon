@@ -21,8 +21,6 @@ public class Status {
         idRead = true;
         this.id = id;
         if(idRead && ordered) {
-            idRead = false;
-            ordered = false;
             // TODO: Transfer.
         }
     }
@@ -30,4 +28,12 @@ public class Status {
     public int getCoffeeOrdered() { return coffeeOrdered; }
 
     public String getId() { return id; }
+
+    public void reset(){
+        this.id = "";
+        this.coffeeOrdered = -1;
+        this.ordered = false;
+        this.idRead = false;
+        
+    }
 }
