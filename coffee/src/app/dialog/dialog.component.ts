@@ -33,7 +33,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Unsubscribe POPUP')
+    console.log('Unsubscribe POPUP');
     this.subscriptionClose.unsubscribe();
   }
 
