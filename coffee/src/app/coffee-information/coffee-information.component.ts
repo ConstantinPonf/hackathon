@@ -15,6 +15,7 @@ export interface CoffeeSorts {
 }
 
 const ELEMENT_DATA: CoffeeSorts[] = [
+  // TODO: Thumbnails ablegen.
   {id: 1,
     thumbnail: 'https://www.nespresso.com/ecom/medias/sys_master/public/10386856312862/C-0004-2000x2000.png?impolicy=product&imwidth=65',
     name: 'Espresso Cosi', description: 'Fruity', price: 1},
