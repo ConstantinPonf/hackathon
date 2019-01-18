@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../http.service';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-import { CloseDialogService } from '../shared/closeDialog-service';
 import { ChipScannedService } from '../shared/chipScanned-service';
-import { ChangePopupTextService } from '../shared/changePopupText-service';
 import { BrewedCoffeeService } from '../shared/brewedCoffee-service';
 import { ClosePopupService } from '../shared/closePopup-service';
 
