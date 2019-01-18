@@ -1,17 +1,15 @@
-import { BrowserModule } from '@angular/platform-browser';
+import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { MaterialModule } from './material';
-import { HttpService } from './http.service';
-import { HttpModule } from '@angular/http';
+import { MaterialModule } from './shared/material';
+import { HttpService } from './shared/http.service';
 import { HttpClientModule } from '@angular/common/http';
+import { ClosePopupService } from './shared/closePopup-service';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 import { AppComponent } from './app.component';
 import { CoffeeInformationComponent } from './coffee-information/coffee-information.component';
 import { DialogComponent } from './dialog/dialog.component';
-import {MatDialogModule, MatIconModule} from '@angular/material';
-import {ChipScannedService} from './shared/chipScanned-service';
 
 @NgModule({
   declarations: [
@@ -24,12 +22,11 @@ import {ChipScannedService} from './shared/chipScanned-service';
     BrowserAnimationsModule,
     MaterialModule,
     HttpClientModule,
-    MatDialogModule,
-    MatIconModule
   ],
   providers: [
     HttpService,
-    ChipScannedService,
+    ClosePopupService,
+    Title
   ],
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent],

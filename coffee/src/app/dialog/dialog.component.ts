@@ -10,14 +10,7 @@ import { ClosePopupService } from '../shared/closePopup-service';
 })
 export class DialogComponent implements OnInit, OnDestroy {
 
-  message: any;
-  subscription: Subscription;
-
-  message2: any;
-  subscription2: Subscription;
   scannedTrue = false;
-
-  messageClose: any;
   subscriptionClose: Subscription;
 
   constructor(private dialogRef: MatDialogRef<DialogComponent>,
@@ -40,7 +33,7 @@ export class DialogComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    console.log('Unsubscribe POPUP')
+    console.log('Unsubscribe POPUP');
     this.subscriptionClose.unsubscribe();
   }
 

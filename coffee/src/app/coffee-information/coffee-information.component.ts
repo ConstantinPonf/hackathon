@@ -1,11 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../http.service';
-import { MatDialog, MatDialogConfig, MatDialogRef } from '@angular/material';
+import { HttpService } from '../shared/http.service';
+import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
-import { CloseDialogService } from '../shared/closeDialog-service';
-import { ChipScannedService } from '../shared/chipScanned-service';
-import { ChangePopupTextService } from '../shared/changePopupText-service';
-import { BrewedCoffeeService } from '../shared/brewedCoffee-service';
 import { ClosePopupService } from '../shared/closePopup-service';
 
 export interface CoffeeSorts {
@@ -19,22 +15,22 @@ export interface CoffeeSorts {
 const ELEMENT_DATA: CoffeeSorts[] = [
   {
     id: 1,
-    thumbnail: 'assets/EspressoCosi.jp2',
+    thumbnail: 'assets/EspressoCosi.png',
     name: 'Espresso Cosi', description: 'Fruity', price: 1
   },
   {
     id: 2,
-    thumbnail: 'assets/Ristretto.jp2',
+    thumbnail: 'assets/Ristretto.png',
     name: 'Ristretto', description: 'Powerful and Contrasting', price: 1
   },
   {
     id: 3,
-    thumbnail: 'assets/MasterOriginIndia.jp2',
+    thumbnail: 'assets/MasterOriginIndia.png',
     name: 'Master Origin India', description: 'Intense and Spicy', price: 1
   },
   {
     id: 4,
-    thumbnail: 'assets/MasterOriginIndonesia.jp2',
+    thumbnail: 'assets/MasterOriginIndonesia.png',
     name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1
   },
   {
@@ -55,13 +51,9 @@ export class CoffeeInformationComponent implements OnInit {
 
   selectedRowIndex = -1;
   coffeeInProcess = false;
-  // jasonFile: String = 'C:\Users\const\Documents\hackathon\arduinoCom';
 
-  constructor(private httpService: HttpService,
-    private dialog: MatDialog,
-    private chipScannedService: ChipScannedService,
-    private brewedCoffeeService: BrewedCoffeeService,
-    private closePopupService: ClosePopupService) { }
+  constructor(private httpService: HttpService, private dialog: MatDialog,
+              private closePopupService: ClosePopupService) { }
 
   ngOnInit() {
   }
@@ -95,19 +87,19 @@ export class CoffeeInformationComponent implements OnInit {
     this.dialog.open(DialogComponent, dialogConfig);
 
     let counter = 0;
-    while (this.chipScannedService.scanned === false) {
+    while (this.httpService.scanned === false) {
       await this.delay(500);
-      this.chipScannedService.getData();
-      console.log(this.chipScannedService.scanned);
+      this.httpService.getData();
+      console.log(this.httpService.scanned);
 
       // ONLY FOR TESTING
       if (counter === 5) {
-        this.chipScannedService.scanned = true;
+        this.httpService.scanned = true;
       }
       // ONLY FOR TESTING END
       if (counter === 9) {
         this.resetRow();
-        this.brewedCoffeeService.coffeeBrewed();
+        this.httpService.coffeeBrewed();
         this.sendMessage('close');
         this.sendMessage('');
         return;
@@ -118,9 +110,9 @@ export class CoffeeInformationComponent implements OnInit {
     this.sendMessage('prepare');
     await this.delay(2500);
 
-    this.chipScannedService.scanned = false;
+    this.httpService.scanned = false;
     this.resetRow();
-    this.brewedCoffeeService.coffeeBrewed();
+    this.httpService.coffeeBrewed();
     this.sendMessage('close');
     this.sendMessage('');
 
