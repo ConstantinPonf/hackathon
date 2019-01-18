@@ -19,22 +19,22 @@ export interface CoffeeSorts {
 const ELEMENT_DATA: CoffeeSorts[] = [
   {
     id: 1,
-    thumbnail: 'assets/EspressoCosi.jp2',
+    thumbnail: 'assets/EspressoCosi.png',
     name: 'Espresso Cosi', description: 'Fruity', price: 1
   },
   {
     id: 2,
-    thumbnail: 'assets/Ristretto.jp2',
+    thumbnail: 'assets/Ristretto.png',
     name: 'Ristretto', description: 'Powerful and Contrasting', price: 1
   },
   {
     id: 3,
-    thumbnail: 'assets/MasterOriginIndia.jp2',
+    thumbnail: 'assets/MasterOriginIndia.png',
     name: 'Master Origin India', description: 'Intense and Spicy', price: 1
   },
   {
     id: 4,
-    thumbnail: 'assets/MasterOriginIndonesia.jp2',
+    thumbnail: 'assets/MasterOriginIndonesia.png',
     name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1
   },
   {
