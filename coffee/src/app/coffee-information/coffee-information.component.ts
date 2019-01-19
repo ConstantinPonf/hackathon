@@ -3,6 +3,7 @@ import { HttpService } from '../shared/http.service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ClosePopupService } from '../shared/closePopup-service';
+import { Web3 } from 'web3';
 
 export interface CoffeeSorts {
   id: number;
@@ -131,5 +132,77 @@ export class CoffeeInformationComponent implements OnInit {
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
+  }
+
+  purchase() {
+    const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
+    web3.eth.defaultAccount = web3.eth.accounts[0];
+    const coffeeExchange = web3.eth.contract([
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_user",
+            "type": "address"
+          }
+        ],
+        "name": "refill",
+        "outputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [],
+        "name": "transfer",
+        "outputs": [],
+        "payable": true,
+        "stateMutability": "payable",
+        "type": "function"
+      },
+      {
+        "constant": false,
+        "inputs": [
+          {
+            "name": "_buyer",
+            "type": "address"
+          },
+          {
+            "name": "_producer",
+            "type": "address"
+          },
+          {
+            "name": "_farmer",
+            "type": "address"
+          },
+          {
+            "name": "value",
+            "type": "uint256"
+          },
+          {
+            "name": "donation",
+            "type": "uint256"
+          }
+        ],
+        "name": "multiTransfer",
+        "outputs": [
+          {
+            "name": "success",
+            "type": "bool"
+          }
+        ],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "function"
+      },
+      {
+        "inputs": [],
+        "payable": false,
+        "stateMutability": "nonpayable",
+        "type": "constructor"
+      }
+    ]).at(0x8aD64AFa1A3007345F75Ca85311d254243E593D5);
+    coffeeExchange.multiTransfer(web3.eth.accounts[0], web3.eth.accounts[1], web3.eth.accounts[2], 100, 20);
   }
 }
