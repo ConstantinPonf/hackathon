@@ -58,22 +58,8 @@ export class CoffeeInformationComponent implements OnInit {
   contractCoffeeExchangeABI = [
     {
       "constant": false,
-      "inputs": [
-        {
-          "name": "_user",
-          "type": "address"
-        }
-      ],
-      "name": "refill",
-      "outputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
       "inputs": [],
-      "name": "transfer",
+      "name": "buy",
       "outputs": [],
       "payable": true,
       "stateMutability": "payable",
@@ -83,9 +69,23 @@ export class CoffeeInformationComponent implements OnInit {
       "constant": false,
       "inputs": [
         {
-          "name": "_buyer",
+          "name": "_producer",
           "type": "address"
         },
+        {
+          "name": "_farmer",
+          "type": "address"
+        }
+      ],
+      "name": "purchase",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
         {
           "name": "_producer",
           "type": "address"
@@ -93,38 +93,19 @@ export class CoffeeInformationComponent implements OnInit {
         {
           "name": "_farmer",
           "type": "address"
-        },
-        {
-          "name": "value",
-          "type": "uint256"
-        },
-        {
-          "name": "donation",
-          "type": "uint256"
         }
       ],
-      "name": "multiTransfer",
-      "outputs": [
-        {
-          "name": "success",
-          "type": "bool"
-        }
-      ],
-      "payable": false,
-      "stateMutability": "nonpayable",
+      "name": "pay",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
       "type": "function"
-    },
-    {
-      "inputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
     }
   ];
   web3: any;
   accs: any;
   coffeeExchange: any;
-  contractCoffeeExchangeAddress: any;
+  contractCoffeeExchangeAddress: 0xd8114d3f4cBcd8cE428ef23EC97328D716A2144C;
 
   constructor(private httpService: RequestService, private dialog: MatDialog,
               private closePopupService: ClosePopupService) { }
@@ -141,6 +122,7 @@ export class CoffeeInformationComponent implements OnInit {
       this.accs = accs;
     });
     this.coffeeExchange = this.web3.eth.contract(this.contractCoffeeExchangeABI).at(this.contractCoffeeExchangeAddress);
+    console.log(this.coffeeExchange);
   }
 
   highlight(row) {
@@ -193,6 +175,8 @@ export class CoffeeInformationComponent implements OnInit {
     }
 
     this.sendMessage('prepare');
+    this.purchase();
+    console.log('purchase wurde in der aufgerufen.');
     await this.delay(2500);
 
     this.httpService.scanned = false;
@@ -219,7 +203,38 @@ export class CoffeeInformationComponent implements OnInit {
   }
 
   purchase() {
-    this.coffeeExchange.multiTransfer.call(this.web3.eth.getAccounts[0],
-      this.web3.eth.getAccounts[1], this.web3.eth.getAccounts[2], 100, 20);
+    console.log(this.accs[0]);
+    console.log(this.accs[1]);
+    console.log(this.accs[2]);
+    this.coffeeExchange.buy.call(
+      {from: this.accs[0], gas: 1000000, value: 2000000000000000000}, (err, res) => {
+        if (err !== undefined) {
+          console.log('Transaktion1 fehlgeschlagen.');
+          console.log(err);
+        } else {
+          console.log('Transaktion1 erfolgreich.');
+          console.log(res);
+        }
+      });
+    this.coffeeExchange.purchase.call(
+      this.accs[1], this.accs[2], { from: this.accs[0], gas: 1000000 }, (err, res) => {
+        if (err !== undefined) {
+          console.log('Transaktion2 fehlgeschlagen.');
+          console.log(err);
+        } else {
+          console.log('Transaktion2 erfolgreich.');
+          console.log(res);
+        }
+      });
+    this.coffeeExchange.pay.call(
+      this.accs[1], this.accs[2], { from: this.accs[0], gas: 1000000000, value: 2000000000000000000 }, (err, res) => {
+        if (err !== undefined) {
+          console.log('Transaktion3 fehlgeschlagen.');
+          console.log(err);
+        } else {
+          console.log('Transaktion3 erfolgreich.');
+          console.log(res);
+        }
+      });
   }
 }
