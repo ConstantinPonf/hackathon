@@ -1,9 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../shared/http.service';
+import { RequestService } from '../shared/request-service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ClosePopupService } from '../shared/closePopup-service';
-import { Web3 } from 'web3';
+
+const Web3 = require('web3');
+
 
 export interface CoffeeSorts {
   id: number;
@@ -53,10 +55,92 @@ export class CoffeeInformationComponent implements OnInit {
   selectedRowIndex = -1;
   coffeeInProcess = false;
 
-  constructor(private httpService: HttpService, private dialog: MatDialog,
+  contractCoffeeExchangeABI = [
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_user",
+          "type": "address"
+        }
+      ],
+      "name": "refill",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "transfer",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_buyer",
+          "type": "address"
+        },
+        {
+          "name": "_producer",
+          "type": "address"
+        },
+        {
+          "name": "_farmer",
+          "type": "address"
+        },
+        {
+          "name": "value",
+          "type": "uint256"
+        },
+        {
+          "name": "donation",
+          "type": "uint256"
+        }
+      ],
+      "name": "multiTransfer",
+      "outputs": [
+        {
+          "name": "success",
+          "type": "bool"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ];
+  web3: any;
+  accs: any;
+  coffeeExchange: any;
+  contractCoffeeExchangeAddress: any;
+
+  constructor(private httpService: RequestService, private dialog: MatDialog,
               private closePopupService: ClosePopupService) { }
 
   ngOnInit() {
+    this.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
+    this.web3.eth.getAccounts((err, accs) => {
+      if (err != null) {
+        Error('There was an error fetching the ether accounts.');
+      }
+      if (accs.length === 0) {
+        Error('Couldn\'t get any accounts! Make sure Ethereum client is configured correctly.');
+      }
+      this.accs = accs;
+    });
+    this.coffeeExchange = this.web3.eth.contract(this.contractCoffeeExchangeABI).at(this.contractCoffeeExchangeAddress);
   }
 
   highlight(row) {
@@ -135,74 +219,7 @@ export class CoffeeInformationComponent implements OnInit {
   }
 
   purchase() {
-    const web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:7545"));
-    web3.eth.defaultAccount = web3.eth.accounts[0];
-    const coffeeExchange = web3.eth.contract([
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "_user",
-            "type": "address"
-          }
-        ],
-        "name": "refill",
-        "outputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [],
-        "name": "transfer",
-        "outputs": [],
-        "payable": true,
-        "stateMutability": "payable",
-        "type": "function"
-      },
-      {
-        "constant": false,
-        "inputs": [
-          {
-            "name": "_buyer",
-            "type": "address"
-          },
-          {
-            "name": "_producer",
-            "type": "address"
-          },
-          {
-            "name": "_farmer",
-            "type": "address"
-          },
-          {
-            "name": "value",
-            "type": "uint256"
-          },
-          {
-            "name": "donation",
-            "type": "uint256"
-          }
-        ],
-        "name": "multiTransfer",
-        "outputs": [
-          {
-            "name": "success",
-            "type": "bool"
-          }
-        ],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "function"
-      },
-      {
-        "inputs": [],
-        "payable": false,
-        "stateMutability": "nonpayable",
-        "type": "constructor"
-      }
-    ]).at(0x8aD64AFa1A3007345F75Ca85311d254243E593D5);
-    coffeeExchange.multiTransfer(web3.eth.accounts[0], web3.eth.accounts[1], web3.eth.accounts[2], 100, 20).call();
+    this.coffeeExchange.multiTransfer.call(this.web3.eth.getAccounts[0],
+      this.web3.eth.getAccounts[1], this.web3.eth.getAccounts[2], 100, 20);
   }
 }

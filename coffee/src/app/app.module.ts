@@ -1,7 +1,7 @@
 import { BrowserModule, Title } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './shared/material';
-import { HttpService } from './shared/http.service';
+import { RequestService } from './shared/request-service';
 import { HttpClientModule } from '@angular/common/http';
 import { ClosePopupService } from './shared/closePopup-service';
 
@@ -24,7 +24,7 @@ import { DialogComponent } from './dialog/dialog.component';
     HttpClientModule,
   ],
   providers: [
-    HttpService,
+    RequestService,
     ClosePopupService,
     Title
   ],
