@@ -57,48 +57,46 @@ export class CoffeeInformationComponent implements OnInit {
 
   contractCoffeeExchangeABI = [
     {
-      "constant": false,
+      "constant": true,
       "inputs": [],
-      "name": "buy",
-      "outputs": [],
-      "payable": true,
-      "stateMutability": "payable",
+      "name": "counter",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getCounter",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
       "type": "function"
     },
     {
       "constant": false,
-      "inputs": [
-        {
-          "name": "_producer",
-          "type": "address"
-        },
-        {
-          "name": "_farmer",
-          "type": "address"
-        }
-      ],
-      "name": "purchase",
+      "inputs": [],
+      "name": "increment",
       "outputs": [],
       "payable": false,
       "stateMutability": "nonpayable",
-      "type": "function"
-    },
-    {
-      "constant": false,
-      "inputs": [
-        {
-          "name": "_producer",
-          "type": "address"
-        },
-        {
-          "name": "_farmer",
-          "type": "address"
-        }
-      ],
-      "name": "pay",
-      "outputs": [],
-      "payable": true,
-      "stateMutability": "payable",
       "type": "function"
     }
   ];
@@ -206,7 +204,33 @@ export class CoffeeInformationComponent implements OnInit {
     console.log(this.accs[0]);
     console.log(this.accs[1]);
     console.log(this.accs[2]);
-    this.coffeeExchange.buy.call(
+    this.coffeeExchange.getCounter({from: this.accs[0], gas: 20000000000 }, (err, res) => {
+      if (err !== undefined) {
+        console.log('Transaction 1 failed.');
+        console.log(err);
+      } else {
+        console.log('Transaction 1 successful.');
+        console.log(res);
+      }
+    });
+    this.coffeeExchange.increment({from: this.accs[0], gas: 20000000000}, (err, res) => {
+      if (err !== undefined) {
+        console.log('Transaction 2 failed.');
+        console.log(err);
+      } else {
+        console.log('Transaction 2 successful.');
+      }
+    });
+    this.coffeeExchange.getCounter({from: this.accs[0], gas: 20000000000 }, (err, res) => {
+      if (err !== undefined) {
+        console.log('Transaction 3 failed.');
+        console.log(err);
+      } else {
+        console.log('Transaction 3 successful');
+        console.log(res);
+      }
+    });
+    /*this.coffeeExchange.buy.call(
       {from: this.accs[0], gas: 1000000, value: 2000000000000000000}, (err, res) => {
         if (err !== undefined) {
           console.log('Transaktion1 fehlgeschlagen.');
@@ -235,6 +259,6 @@ export class CoffeeInformationComponent implements OnInit {
           console.log('Transaktion3 erfolgreich.');
           console.log(res);
         }
-      });
+      });*/
   }
 }
