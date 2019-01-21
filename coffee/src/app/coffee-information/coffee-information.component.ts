@@ -203,6 +203,6 @@ export class CoffeeInformationComponent implements OnInit {
         "type": "constructor"
       }
     ]).at(0x8aD64AFa1A3007345F75Ca85311d254243E593D5);
-    coffeeExchange.multiTransfer(web3.eth.accounts[0], web3.eth.accounts[1], web3.eth.accounts[2], 100, 20);
+    coffeeExchange.multiTransfer(web3.eth.accounts[0], web3.eth.accounts[1], web3.eth.accounts[2], 100, 20).call();
   }
 }
