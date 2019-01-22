@@ -5,6 +5,7 @@ import http
 import urllib.request
 import time
 import contract_abi
+import contracBuggy_abi
 import codecs
 from web3 import Web3, HTTPProvider
 
@@ -17,7 +18,7 @@ wallet_address       = ""
 w3 = Web3(HTTPProvider("http://localhost:8545"))
 #w3.eth.enable_unaudited_features()
 print("Connected to Blockchain")
-contract = w3.eth.contract(address = contract_address, abi = contract_abi.abi)
+contract = w3.eth.contract(address = contract_address, abi = contracBuggy_abi.abi)
 print("Init Contract")
 accounts = w3.eth.accounts
 print("------------------------------------------")
@@ -46,8 +47,13 @@ while True:
     if ("Card UID:" in input.decode("utf-8") ):
         f = urllib.request.urlopen("http://localhost:8080/reader/uid",input).read().decode('utf-8')
         print("request send " + input.decode('utf-8')+ "did get: \n"+f)
+        f= "true"
         if(f == "true"):
-            res = contract.functions.increment().transact({"from":accounts[0]})
+            res = contract.functions.deposit().transact({"from":accounts[0],"value":1000000000000000000})
+            w3.eth.waitForTransactionReceipt(res)
+            print("Transaction at Block: ")
+            print(codecs.encode(res, 'hex').decode('ascii'))
+            res = contract.functions.withdraw().transact({"from":accounts[0]})
             w3.eth.waitForTransactionReceipt(res)
             print("Transaction at Block: ")
             print(codecs.encode(res, 'hex').decode('ascii'))
