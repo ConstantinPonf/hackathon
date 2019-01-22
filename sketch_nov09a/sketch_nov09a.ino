@@ -1,7 +1,5 @@
-
 #include <MFRC522.h>
 #include <SPI.h>
-//#include <MFRC522.h>
 
 #define SS_PIN 10 // SDA an Pin 10
 #define RST_PIN 9 // RST an Pin 9

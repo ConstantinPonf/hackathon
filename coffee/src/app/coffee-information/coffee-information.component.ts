@@ -71,12 +71,6 @@ export class CoffeeInformationComponent implements OnInit {
       "type": "function"
     },
     {
-      "inputs": [],
-      "payable": false,
-      "stateMutability": "nonpayable",
-      "type": "constructor"
-    },
-    {
       "constant": true,
       "inputs": [],
       "name": "getCounter",
@@ -98,29 +92,23 @@ export class CoffeeInformationComponent implements OnInit {
       "payable": false,
       "stateMutability": "nonpayable",
       "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
     }
-  ];
+  ]
   web3: any;
   accs: any;
   coffeeExchange: any;
-  contractCoffeeExchangeAddress: 0xd8114d3f4cBcd8cE428ef23EC97328D716A2144C;
+  contractCoffeeExchangeAddress: 0xfa541D50E3B434cb2BA7BD6CDb330a94bA0e67c1;
 
   constructor(private httpService: RequestService, private dialog: MatDialog,
               private closePopupService: ClosePopupService) { }
 
   ngOnInit() {
-    this.web3 = new Web3(new Web3.providers.HttpProvider('http://127.0.0.1:7545'));
-    this.web3.eth.getAccounts((err, accs) => {
-      if (err != null) {
-        Error('There was an error fetching the ether accounts.');
-      }
-      if (accs.length === 0) {
-        Error('Couldn\'t get any accounts! Make sure Ethereum client is configured correctly.');
-      }
-      this.accs = accs;
-    });
-    this.coffeeExchange = this.web3.eth.contract(this.contractCoffeeExchangeABI).at(this.contractCoffeeExchangeAddress);
-    console.log(this.coffeeExchange);
   }
 
   highlight(row) {
@@ -155,13 +143,7 @@ export class CoffeeInformationComponent implements OnInit {
     while (this.httpService.scanned === false) {
       await this.delay(500);
       this.httpService.getData();
-      console.log(this.httpService.scanned);
 
-      // ONLY FOR TESTING
-      if (counter === 5) {
-        this.httpService.scanned = true;
-      }
-      // ONLY FOR TESTING END
       if (counter === 9) {
         this.resetRow();
         this.httpService.coffeeBrewed();
@@ -173,7 +155,6 @@ export class CoffeeInformationComponent implements OnInit {
     }
 
     this.sendMessage('prepare');
-    this.purchase();
     console.log('purchase wurde in der aufgerufen.');
     await this.delay(2500);
 
@@ -187,7 +168,6 @@ export class CoffeeInformationComponent implements OnInit {
 
   sendMessage(msg: string): void {
     this.closePopupService.sendMessage(msg);
-    this.closePopupService.sendMessage(msg);
   }
 
   loading() {
@@ -198,67 +178,5 @@ export class CoffeeInformationComponent implements OnInit {
 
   private delay(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
-  }
-
-  purchase() {
-    console.log(this.accs[0]);
-    console.log(this.accs[1]);
-    console.log(this.accs[2]);
-    this.coffeeExchange.getCounter({from: this.accs[0], gas: 20000000000 }, (err, res) => {
-      if (err !== undefined) {
-        console.log('Transaction 1 failed.');
-        console.log(err);
-      } else {
-        console.log('Transaction 1 successful.');
-        console.log(res);
-      }
-    });
-    this.coffeeExchange.increment({from: this.accs[0], gas: 20000000000}, (err, res) => {
-      if (err !== undefined) {
-        console.log('Transaction 2 failed.');
-        console.log(err);
-      } else {
-        console.log('Transaction 2 successful.');
-      }
-    });
-    this.coffeeExchange.getCounter({from: this.accs[0], gas: 20000000000 }, (err, res) => {
-      if (err !== undefined) {
-        console.log('Transaction 3 failed.');
-        console.log(err);
-      } else {
-        console.log('Transaction 3 successful');
-        console.log(res);
-      }
-    });
-    /*this.coffeeExchange.buy.call(
-      {from: this.accs[0], gas: 1000000, value: 2000000000000000000}, (err, res) => {
-        if (err !== undefined) {
-          console.log('Transaktion1 fehlgeschlagen.');
-          console.log(err);
-        } else {
-          console.log('Transaktion1 erfolgreich.');
-          console.log(res);
-        }
-      });
-    this.coffeeExchange.purchase.call(
-      this.accs[1], this.accs[2], { from: this.accs[0], gas: 1000000 }, (err, res) => {
-        if (err !== undefined) {
-          console.log('Transaktion2 fehlgeschlagen.');
-          console.log(err);
-        } else {
-          console.log('Transaktion2 erfolgreich.');
-          console.log(res);
-        }
-      });
-    this.coffeeExchange.pay.call(
-      this.accs[1], this.accs[2], { from: this.accs[0], gas: 1000000000, value: 2000000000000000000 }, (err, res) => {
-        if (err !== undefined) {
-          console.log('Transaktion3 fehlgeschlagen.');
-          console.log(err);
-        } else {
-          console.log('Transaktion3 erfolgreich.');
-          console.log(res);
-        }
-      });*/
   }
 }
