@@ -10,7 +10,7 @@ const httpOptions = {
 @Injectable({
   providedIn: 'root'
 })
-export class HttpService {
+export class RequestService {
   url = 'http://localhost:8080/coffee/';
   scanned = false;
 

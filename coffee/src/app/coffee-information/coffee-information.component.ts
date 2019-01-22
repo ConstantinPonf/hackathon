@@ -1,8 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpService } from '../shared/http.service';
+import { RequestService } from '../shared/request-service';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { ClosePopupService } from '../shared/closePopup-service';
+
+const Web3 = require('web3');
+
 
 export interface CoffeeSorts {
   id: number;
@@ -52,7 +55,57 @@ export class CoffeeInformationComponent implements OnInit {
   selectedRowIndex = -1;
   coffeeInProcess = false;
 
-  constructor(private httpService: HttpService, private dialog: MatDialog,
+  contractCoffeeExchangeABI = [
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "counter",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": true,
+      "inputs": [],
+      "name": "getCounter",
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "payable": false,
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "constant": false,
+      "inputs": [],
+      "name": "increment",
+      "outputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "payable": false,
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    }
+  ]
+  web3: any;
+  accs: any;
+  coffeeExchange: any;
+  contractCoffeeExchangeAddress: 0xfa541D50E3B434cb2BA7BD6CDb330a94bA0e67c1;
+
+  constructor(private httpService: RequestService, private dialog: MatDialog,
               private closePopupService: ClosePopupService) { }
 
   ngOnInit() {
@@ -88,15 +141,9 @@ export class CoffeeInformationComponent implements OnInit {
 
     let counter = 0;
     while (this.httpService.scanned === false) {
-      await this.delay(500);
+      await this.delay(700);
       this.httpService.getData();
-      console.log(this.httpService.scanned);
 
-      // ONLY FOR TESTING
-      if (counter === 5) {
-        this.httpService.scanned = true;
-      }
-      // ONLY FOR TESTING END
       if (counter === 9) {
         this.resetRow();
         this.httpService.coffeeBrewed();
@@ -108,6 +155,7 @@ export class CoffeeInformationComponent implements OnInit {
     }
 
     this.sendMessage('prepare');
+    console.log('purchase wurde in der aufgerufen.');
     await this.delay(2500);
 
     this.httpService.scanned = false;
@@ -119,7 +167,6 @@ export class CoffeeInformationComponent implements OnInit {
   }
 
   sendMessage(msg: string): void {
-    this.closePopupService.sendMessage(msg);
     this.closePopupService.sendMessage(msg);
   }
 
