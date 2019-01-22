@@ -17,8 +17,8 @@ public class ReaderController {
     }
 
     @PostMapping("/uid")
-    public String getTest(@RequestBody byte[] bytes) {
-        if (!statusService.getIdRead()) {
+    public boolean getTest(@RequestBody byte[] bytes) {
+        if (!statusService.getIdRead() && statusService.getOrdered()) {
             String uid = new String(bytes);
             uid = uid.substring(12, 23);
             String temp = "0x";
@@ -27,8 +27,8 @@ public class ReaderController {
             }
             uid = temp;
             statusService.setId(uid);
-            return uid;
+            return true;
         }
-        return "";
+        return false;
     }
 }

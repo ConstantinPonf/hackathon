@@ -44,7 +44,14 @@ def request(path,information):
 while True:
     input = ser.readline()
     if ("Card UID:" in input.decode("utf-8") ):
-        f = urllib.request.urlopen("http://localhost:8080/reader/uid",input)
-        print("request send " + input.decode('utf-8')+ "did get: \n"+f.read().decode('utf-8'))
+        f = urllib.request.urlopen("http://localhost:8080/reader/uid",input).read().decode('utf-8')
+        print("request send " + input.decode('utf-8')+ "did get: \n"+f)
+        if(f == "true"):
+            res = contract.functions.increment().transact({"from":accounts[0]})
+            w3.eth.waitForTransactionReceipt(res)
+            print("Transaction at Block: ")
+            print(codecs.encode(res, 'hex').decode('ascii'))
+        else:
+            print("No transaction in pipe")
 
 

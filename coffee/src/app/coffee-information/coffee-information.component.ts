@@ -141,7 +141,7 @@ export class CoffeeInformationComponent implements OnInit {
 
     let counter = 0;
     while (this.httpService.scanned === false) {
-      await this.delay(500);
+      await this.delay(700);
       this.httpService.getData();
 
       if (counter === 9) {
