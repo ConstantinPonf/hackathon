@@ -39,4 +39,9 @@ contract CoffeeBuggy {
         if(rest > 0) { balance[msg.sender] += rest; }
         return true;
     }
+
+    function purchase(address payable _producer, address payable _farmer) public payable {
+        _producer.transfer(msg.value/2);
+        _farmer.transfer(msg.value/2);
+    }
 }

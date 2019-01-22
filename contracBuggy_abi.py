@@ -74,5 +74,24 @@ abi = """[
       "stateMutability": "nonpayable",
       "type": "function",
       "signature": "0xb3d76188"
+    },
+    {
+      "constant": false,
+      "inputs": [
+        {
+          "name": "_producer",
+          "type": "address"
+        },
+        {
+          "name": "_farmer",
+          "type": "address"
+        }
+      ],
+      "name": "purchase",
+      "outputs": [],
+      "payable": true,
+      "stateMutability": "payable",
+      "type": "function",
+      "signature": "0xdde5a65d"
     }
   ]"""

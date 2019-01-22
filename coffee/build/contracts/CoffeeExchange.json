@@ -59,14 +59,14 @@
     "absolutePath": "/home/constantin/Documents/hackathon/coffee/contracts/CoffeeExchange.sol",
     "exportedSymbols": {
       "CoffeeExchange": [
-        228
+        254
       ]
     },
-    "id": 229,
+    "id": 255,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 202,
+        "id": 228,
         "literals": [
           "solidity",
           "0.5"
@@ -80,19 +80,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 228,
+        "id": 254,
         "linearizedBaseContracts": [
-          228
+          254
         ],
         "name": "CoffeeExchange",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 204,
+            "id": 230,
             "name": "counter",
             "nodeType": "VariableDeclaration",
-            "scope": 228,
+            "scope": 254,
             "src": "51:22:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -101,7 +101,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 203,
+              "id": 229,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "51:7:1",
@@ -115,25 +115,25 @@
           },
           {
             "body": {
-              "id": 211,
+              "id": 237,
               "nodeType": "Block",
               "src": "105:28:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 209,
+                    "id": 235,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 207,
+                      "id": 233,
                       "name": "counter",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 204,
+                      "referencedDeclaration": 230,
                       "src": "115:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -145,7 +145,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "31",
-                      "id": 208,
+                      "id": 234,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -166,32 +166,32 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 210,
+                  "id": 236,
                   "nodeType": "ExpressionStatement",
                   "src": "115:11:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 212,
+            "id": 238,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 205,
+              "id": 231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "95:2:1"
             },
             "returnParameters": {
-              "id": 206,
+              "id": 232,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "105:0:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "84:49:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -199,54 +199,54 @@
           },
           {
             "body": {
-              "id": 219,
+              "id": 245,
               "nodeType": "Block",
               "src": "195:31:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 217,
+                    "id": 243,
                     "name": "counter",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 204,
+                    "referencedDeclaration": 230,
                     "src": "212:7:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 216,
-                  "id": 218,
+                  "functionReturnParameters": 242,
+                  "id": 244,
                   "nodeType": "Return",
                   "src": "205:14:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 220,
+            "id": 246,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCounter",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 213,
+              "id": 239,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "162:2:1"
             },
             "returnParameters": {
-              "id": 216,
+              "id": 242,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 215,
+                  "id": 241,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 220,
+                  "scope": 246,
                   "src": "186:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -255,7 +255,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 214,
+                    "id": 240,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "186:7:1",
@@ -270,7 +270,7 @@
               ],
               "src": "185:9:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "143:83:1",
             "stateMutability": "view",
             "superFunction": null,
@@ -278,14 +278,14 @@
           },
           {
             "body": {
-              "id": 226,
+              "id": 252,
               "nodeType": "Block",
               "src": "264:26:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 224,
+                    "id": 250,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -296,11 +296,11 @@
                     "src": "274:9:1",
                     "subExpression": {
                       "argumentTypes": null,
-                      "id": 223,
+                      "id": 249,
                       "name": "counter",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 204,
+                      "referencedDeclaration": 230,
                       "src": "274:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -312,39 +312,39 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 225,
+                  "id": 251,
                   "nodeType": "ExpressionStatement",
                   "src": "274:9:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 227,
+            "id": 253,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "increment",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 221,
+              "id": 247,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "254:2:1"
             },
             "returnParameters": {
-              "id": 222,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "264:0:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "236:54:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 229,
+        "scope": 255,
         "src": "21:271:1"
       }
     ],
@@ -354,14 +354,14 @@
     "absolutePath": "/home/constantin/Documents/hackathon/coffee/contracts/CoffeeExchange.sol",
     "exportedSymbols": {
       "CoffeeExchange": [
-        228
+        254
       ]
     },
-    "id": 229,
+    "id": 255,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 202,
+        "id": 228,
         "literals": [
           "solidity",
           "0.5"
@@ -375,19 +375,19 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 228,
+        "id": 254,
         "linearizedBaseContracts": [
-          228
+          254
         ],
         "name": "CoffeeExchange",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "constant": false,
-            "id": 204,
+            "id": 230,
             "name": "counter",
             "nodeType": "VariableDeclaration",
-            "scope": 228,
+            "scope": 254,
             "src": "51:22:1",
             "stateVariable": true,
             "storageLocation": "default",
@@ -396,7 +396,7 @@
               "typeString": "uint256"
             },
             "typeName": {
-              "id": 203,
+              "id": 229,
               "name": "uint256",
               "nodeType": "ElementaryTypeName",
               "src": "51:7:1",
@@ -410,25 +410,25 @@
           },
           {
             "body": {
-              "id": 211,
+              "id": 237,
               "nodeType": "Block",
               "src": "105:28:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 209,
+                    "id": 235,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
                     "lValueRequested": false,
                     "leftHandSide": {
                       "argumentTypes": null,
-                      "id": 207,
+                      "id": 233,
                       "name": "counter",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 204,
+                      "referencedDeclaration": 230,
                       "src": "115:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -440,7 +440,7 @@
                     "rightHandSide": {
                       "argumentTypes": null,
                       "hexValue": "31",
-                      "id": 208,
+                      "id": 234,
                       "isConstant": false,
                       "isLValue": false,
                       "isPure": true,
@@ -461,32 +461,32 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 210,
+                  "id": 236,
                   "nodeType": "ExpressionStatement",
                   "src": "115:11:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 212,
+            "id": 238,
             "implemented": true,
             "kind": "constructor",
             "modifiers": [],
             "name": "",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 205,
+              "id": 231,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "95:2:1"
             },
             "returnParameters": {
-              "id": 206,
+              "id": 232,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "105:0:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "84:49:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
@@ -494,54 +494,54 @@
           },
           {
             "body": {
-              "id": 219,
+              "id": 245,
               "nodeType": "Block",
               "src": "195:31:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 217,
+                    "id": 243,
                     "name": "counter",
                     "nodeType": "Identifier",
                     "overloadedDeclarations": [],
-                    "referencedDeclaration": 204,
+                    "referencedDeclaration": 230,
                     "src": "212:7:1",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
                     }
                   },
-                  "functionReturnParameters": 216,
-                  "id": 218,
+                  "functionReturnParameters": 242,
+                  "id": 244,
                   "nodeType": "Return",
                   "src": "205:14:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 220,
+            "id": 246,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "getCounter",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 213,
+              "id": 239,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "162:2:1"
             },
             "returnParameters": {
-              "id": 216,
+              "id": 242,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 215,
+                  "id": 241,
                   "name": "",
                   "nodeType": "VariableDeclaration",
-                  "scope": 220,
+                  "scope": 246,
                   "src": "186:7:1",
                   "stateVariable": false,
                   "storageLocation": "default",
@@ -550,7 +550,7 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 214,
+                    "id": 240,
                     "name": "uint256",
                     "nodeType": "ElementaryTypeName",
                     "src": "186:7:1",
@@ -565,7 +565,7 @@
               ],
               "src": "185:9:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "143:83:1",
             "stateMutability": "view",
             "superFunction": null,
@@ -573,14 +573,14 @@
           },
           {
             "body": {
-              "id": 226,
+              "id": 252,
               "nodeType": "Block",
               "src": "264:26:1",
               "statements": [
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 224,
+                    "id": 250,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -591,11 +591,11 @@
                     "src": "274:9:1",
                     "subExpression": {
                       "argumentTypes": null,
-                      "id": 223,
+                      "id": 249,
                       "name": "counter",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 204,
+                      "referencedDeclaration": 230,
                       "src": "274:7:1",
                       "typeDescriptions": {
                         "typeIdentifier": "t_uint256",
@@ -607,39 +607,39 @@
                       "typeString": "uint256"
                     }
                   },
-                  "id": 225,
+                  "id": 251,
                   "nodeType": "ExpressionStatement",
                   "src": "274:9:1"
                 }
               ]
             },
             "documentation": null,
-            "id": 227,
+            "id": 253,
             "implemented": true,
             "kind": "function",
             "modifiers": [],
             "name": "increment",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 221,
+              "id": 247,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "254:2:1"
             },
             "returnParameters": {
-              "id": 222,
+              "id": 248,
               "nodeType": "ParameterList",
               "parameters": [],
               "src": "264:0:1"
             },
-            "scope": 228,
+            "scope": 254,
             "src": "236:54:1",
             "stateMutability": "nonpayable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 229,
+        "scope": 255,
         "src": "21:271:1"
       }
     ],
@@ -658,7 +658,7 @@
     }
   },
   "schemaVersion": "3.0.1",
-  "updatedAt": "2019-01-22T18:42:44.655Z",
+  "updatedAt": "2019-01-22T18:50:20.494Z",
   "devdoc": {
     "methods": {}
   },

@@ -11,14 +11,14 @@ from web3 import Web3, HTTPProvider
 
 print("Hello Word! I am here to serve")
 
-contract_address     = "0xfa541D50E3B434cb2BA7BD6CDb330a94bA0e67c1"
-wallet_private_key   = ""
-wallet_address       = ""
+contract_address = "0xfa541D50E3B434cb2BA7BD6CDb330a94bA0e67c1"
+wallet_private_key = ""
+wallet_address = ""
 
 w3 = Web3(HTTPProvider("http://localhost:8545"))
-#w3.eth.enable_unaudited_features()
+# w3.eth.enable_unaudited_features()
 print("Connected to Blockchain")
-contract = w3.eth.contract(address = contract_address, abi = contracBuggy_abi.abi)
+contract = w3.eth.contract(address=contract_address, abi=contracBuggy_abi.abi)
 print("Init Contract")
 accounts = w3.eth.accounts
 print("------------------------------------------")
@@ -37,27 +37,36 @@ print(res)
 
 ser = serial.Serial('/dev/ttyACM0', 9600)
 print("Serial Port for the Arduino opened")
-def request(path,information):
-    f = urllib.request.urlopen("http://localhost:8080/" + path,information)
+
+
+def request(path, information):
+    f = urllib.request.urlopen("http://localhost:8080/" + path, information)
     s = f.read().decode("utf-8")
     return s
-        
+
+
 while True:
     input = ser.readline()
-    if ("Card UID:" in input.decode("utf-8") ):
-        f = urllib.request.urlopen("http://localhost:8080/reader/uid",input).read().decode('utf-8')
-        print("request send " + input.decode('utf-8')+ "did get: \n"+f)
-        f= "true"
+    if ("Card UID:" in input.decode("utf-8")):
+        f = urllib.request.urlopen(
+            "http://localhost:8080/reader/uid", input).read().decode('utf-8')
+        print("request send " + input.decode('utf-8') + "did get: \n"+f)
+        f = "true"
         if(f == "true"):
-            res = contract.functions.deposit().transact({"from":accounts[0],"value":1000000000000000000})
-            w3.eth.waitForTransactionReceipt(res)
-            print("Transaction at Block: ")
-            print(codecs.encode(res, 'hex').decode('ascii'))
-            res = contract.functions.withdraw().transact({"from":accounts[0]})
+            '''
+             res = contract.functions.deposit().transact({"from":accounts[0],"value":1000000000000000000})
+             w3.eth.waitForTransactionReceipt(res)
+             print("Transaction at Block: ")
+             print(codecs.encode(res, 'hex').decode('ascii'))
+             res = contract.functions.withdraw().transact({"from":accounts[0]})
+             w3.eth.waitForTransactionReceipt(res)
+             print("Transaction at Block: ")
+             print(codecs.encode(res, 'hex').decode('ascii'))
+             '''
+            res = contract.functions.purchase(accounts[2],accounts[3]).transact({
+                "from": accounts[0], "value": 1000000000000000000})
             w3.eth.waitForTransactionReceipt(res)
             print("Transaction at Block: ")
             print(codecs.encode(res, 'hex').decode('ascii'))
         else:
             print("No transaction in pipe")
-
-
