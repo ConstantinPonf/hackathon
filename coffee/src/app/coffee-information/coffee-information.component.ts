@@ -19,27 +19,27 @@ const ELEMENT_DATA: CoffeeSorts[] = [
   {
     id: 1,
     thumbnail: 'assets/EspressoCosi.png',
-    name: 'Espresso Cosi', description: 'Fruity', price: 1
+    name: 'Espresso Cosi', description: 'Fruity', price: 2
   },
   {
     id: 2,
     thumbnail: 'assets/Ristretto.png',
-    name: 'Ristretto', description: 'Powerful and Contrasting', price: 1
+    name: 'Ristretto', description: 'Powerful and Contrasting', price: 2
   },
   {
     id: 3,
     thumbnail: 'assets/MasterOriginIndia.png',
-    name: 'Master Origin India', description: 'Intense and Spicy', price: 1
+    name: 'Master Origin India', description: 'Intense and Spicy', price: 2
   },
   {
     id: 4,
     thumbnail: 'assets/MasterOriginIndonesia.png',
-    name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 1
+    name: 'Master Origin Indonesia', description: 'Rich, with woody notes', price: 2
   },
   {
     id: 5,
     thumbnail: 'assets/VariationsParisMacaron.png',
-    name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 1
+    name: 'Variations Paris Macaron', description: 'Almond flavoured', price: 2
   }
 ];
 
