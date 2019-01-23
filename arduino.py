@@ -59,7 +59,7 @@ while True:
              '''
             key = keyMapping[input.decode("ascii").replace("\r\n","")]
             res = contract.functions.purchase(accounts[4+key*2],accounts[5+key*2]).transact({
-                "from": accounts[key], "value": 1000000000000000000})
+                "from": accounts[key], "value": 2000000000000000000})
             w3.eth.waitForTransactionReceipt(res)
             print("Transaction at Block: ")
             print(codecs.encode(res, 'hex').decode('ascii'))
